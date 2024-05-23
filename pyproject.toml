@@ -13,6 +13,9 @@ attrs = "^23.2.0"
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.29.4"
 ipywidgets = "^8.1.2"
+sphinx = "^7.3.7"
+sphinx-autodoc-typehints = "^2.1.0"
+pydata-sphinx-theme = "^0.15.2"
 
 [build-system]
 requires = ["poetry-core"]
