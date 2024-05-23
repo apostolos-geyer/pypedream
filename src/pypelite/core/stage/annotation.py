@@ -58,7 +58,7 @@ class StageInputMapping(Protocol[T]):
     get(where: T) -> dict[str, Any]
         maps the input to a dictionary with a single key `as_arg` that maps to the input value.
 
-    bind(source: T) -> None
+    bind(source: T) -> Self
         binds the input mapping to a source, allowing the `get` method to be called without passing the source.
     """
 
@@ -84,4 +84,7 @@ class StageInputMapping(Protocol[T]):
         ValueError
             if the input is required and not found
         """
+        ...
+
+    def bind(self, source: T) -> "StageInputMapping[T]":
         ...
