@@ -1,0 +1,37 @@
+pypelite.core.stage.outputs
+===========================
+
+.. automodule:: pypelite.core.stage.outputs
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      DEFAULT_OUTPUT_MAPPER
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      KeyedOutputMapper
+      OutputMapperBehaviour
+      SequentialOutputMapper
+   
+   
+
+   
+   
+   
+
+
+

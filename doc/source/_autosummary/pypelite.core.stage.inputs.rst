@@ -1,0 +1,39 @@
+pypelite.core.stage.inputs
+==========================
+
+.. automodule:: pypelite.core.stage.inputs
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      bind_inputs
+      bind_inputs_by_type
+      prepare_inputs
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+   
+      DefaultInput
+      DependencyInput
+      KeyedInput
+   
+   
+
+   
+   
+   
+
+
+

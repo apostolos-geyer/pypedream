@@ -1,0 +1,33 @@
+pypelite.core
+=============
+
+.. automodule:: pypelite.core
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   pypelite.core.exceptions
+   pypelite.core.pipeline
+   pypelite.core.stage
+

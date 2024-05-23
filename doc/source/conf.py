@@ -7,9 +7,12 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 import os
 import sys
-import pydata_sphinx_theme
+import pydata_sphinx_theme # noqa
 
 sys.path.insert(0, os.path.abspath('../..'))
+sys.path.insert(0, os.path.abspath('../../src'))
+
+import pypelite # noqa
 
 project = 'pypeLite'
 copyright = '2024, Apostolos Geyer'

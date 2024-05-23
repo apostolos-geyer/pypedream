@@ -1,0 +1,34 @@
+pypelite.core.stage
+===================
+
+.. automodule:: pypelite.core.stage
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   pypelite.core.stage.annotation
+   pypelite.core.stage.inputs
+   pypelite.core.stage.models
+   pypelite.core.stage.outputs
+

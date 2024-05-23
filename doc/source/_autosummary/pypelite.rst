@@ -1,0 +1,31 @@
+﻿pypelite
+========
+
+.. automodule:: pypelite
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :recursive:
+
+   pypelite.core
+

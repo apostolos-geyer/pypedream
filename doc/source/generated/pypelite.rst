@@ -1,0 +1,23 @@
+﻿pypelite
+========
+
+.. automodule:: pypelite
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
