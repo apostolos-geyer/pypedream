@@ -69,13 +69,13 @@ class DependencyInput:
         passed as where. The source can still be overriden by calling get with an argument.
     """
 
-    required: bool
-    as_arg: str
-    from_stage: StageKey
+    as_arg: str = field()
+    from_stage: StageKey = field()
     from_output: str = field(default=DEFAULT_OUTPUT_KEY)
     default = field(default=INPUT_NOT_FOUND)
-    bound: bool = field(default=False)
-    _bound_to: StageTable | None = field(default=None)
+    required: bool = field(default=True)
+    bound: bool = field(default=False, init=False)
+    _bound_to: StageTable | None = field(default=None, init=False)
 
     def get(self, where: StageTable | None = None) -> dict[str, Any]:
         """
@@ -128,7 +128,7 @@ class DependencyInput:
 
         return {self.as_arg: stage.outputs[self.from_output]}
 
-    def bind(self, source: StageTable) -> None:
+    def bind(self, source: StageTable) -> 'DependencyInput':
         """
         Binds the input mapping to a source.
 
@@ -139,6 +139,7 @@ class DependencyInput:
         """
         self.bound = True
         self._bound_to = source
+        return self
 
 
 @define
@@ -168,12 +169,12 @@ class KeyedInput:
         binds the input mapping to a source, allowing the `get` method to be called without passing the source.
     """
 
-    required: bool
-    as_arg: str
-    from_key: str
+    as_arg: str = field()
+    from_key: str = field()
     default: str = field(default=INPUT_NOT_FOUND)
-    bound: bool = field(default=False)
-    _bound_to: StageTable | None = field(default=None)
+    required: bool = field(default=True)
+    bound: bool = field(default=False, init=False)
+    _bound_to: StageTable | None = field(default=None, init=False)
 
     def get(self, where: Mapping[str, Any] | None = None) -> dict[str, Any]:
         """
@@ -211,7 +212,7 @@ class KeyedInput:
 
         return {self.as_arg: where[self.from_key]}
 
-    def bind(self, source: Mapping[str, Any]) -> None:
+    def bind(self, source: Mapping[str, Any]) -> 'KeyedInput':
         """
         Binds the input mapping to a source.
 
@@ -222,6 +223,7 @@ class KeyedInput:
         """
         self.bound = True
         self._bound_to = source
+        return self
 
 
 @define
@@ -282,7 +284,7 @@ class DefaultInput:
             return {self.as_arg: where}
         return {self.as_arg: self.value}
 
-    def bind(self, source: Any) -> None:
+    def bind(self, source: Any) -> 'DefaultInput':
         """
         Binds the input mapping to a source.
 
@@ -292,6 +294,7 @@ class DefaultInput:
             the source to bind the mapping to
         """
         self.value = source
+        return self
 
 
 def bind_inputs(

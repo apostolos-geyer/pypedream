@@ -9,6 +9,7 @@ from pypelite.core.stage.inputs import (
     DependencyInput,
     KeyedInput,
     bind_inputs,
+    prepare_inputs,
 )
 
 from pypelite.core.stage.annotation import (
@@ -467,3 +468,55 @@ class Pipeline:
         elif callable(name_or_callable):
             stage_key = name_or_callable.__name__
             return decorator(name_or_callable)
+
+    def run_stage(self, stage_key: str, **kwargs: Any) -> Any:
+        """
+        Runs a stage in the pipeline, using the configured inputs and outputs
+        The output of the stage is returned and also stored in the stages output
+
+
+        Parameters
+        ----------
+        stage_key : str
+            the key of the stage to run
+
+        kwargs : dict
+            keyword arguments to pass to the stage, overrides any configured inputs
+            not validated so be careful
+
+        Returns
+        -------
+        the output of the stage
+        """
+        stage = self.stages[stage_key]
+        inputs = prepare_inputs(stage.inputs)
+        inputs.update(kwargs)
+        output = stage.function(**inputs)
+        mapped_output = stage.output_mapper(output)
+        self.stages[stage_key].outputs = mapped_output
+        self.stages[stage_key].has_run = True
+        return output
+    
+    def run(self, **kwargs: Any) -> dict[str, Any]:
+        """
+        Runs all the stages in the pipeline in sequence
+        The output of each stage is stored in the stages output
+
+        Parameters
+        ----------
+        kwargs : dict
+            keyword arguments to pass to the stages, overrides any configured inputs
+            not validated so be careful
+
+        Returns
+        -------
+        a dictionary of the outputs of each stage
+        """
+        outputs = {}
+        for stage_key in self.stages:
+            outputs[stage_key] = self.run_stage(stage_key, **kwargs)
+        return outputs
+
+
+
+        

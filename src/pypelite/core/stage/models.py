@@ -1,4 +1,5 @@
 from typing import Callable, ParamSpec, TypeVar
+from textwrap import dedent
 
 from attrs import define, field
 
@@ -64,3 +65,29 @@ class Stage:
         """
         self.has_run = False
         self.outputs = {}
+
+
+    def __repr__(self) -> str:
+        repr = dedent(
+            f"""\
+            Stage(
+                function={self.function.__repr__()},
+                inputs={self.inputs.__repr__()},
+                outputs={self.outputs.__repr__()},
+                output_mapper={self.output_mapper.__repr__()},
+                has_run={self.has_run.__repr__()},
+            )""")
+        return repr
+    
+    def __str__(self) -> str:
+        # TODO make this nicer
+        return dedent(
+            f"""\
+            Stage(
+                function={self.function.__str__()},
+                inputs={self.inputs.__str__()},
+                outputs={self.outputs.__str__()},
+                output_mapper={self.output_mapper.__str__()},
+                has_run={self.has_run.__str__()},
+            )""")
+

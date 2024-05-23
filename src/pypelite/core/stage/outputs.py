@@ -208,11 +208,11 @@ class SequentialOutputMapper:
         )
 
     def __repr__(self) -> str:
-        return f"SequenceOutputMapper(keys={self.keys})"
+        return f"SequentialOutputMapper(keys={self.keys})"
 
     @cached_property
     def __str__(self) -> str:
-        string = "SequenceOutputMapper(\n"
+        string = "SequentialOutputMapper(\n"
         for i, key in enumerate(self.keys):
             string += f" Ouput[{i}] -> {key}\n"
         string += ")"
