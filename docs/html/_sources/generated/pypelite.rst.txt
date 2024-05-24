@@ -1,4 +1,0 @@
-﻿pypelite
-========
-
-.. automodule:: pypelite

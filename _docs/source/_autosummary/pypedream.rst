@@ -3,21 +3,21 @@
 
 .. automodule:: pypedream
 
+   
+   
+   
 
+   
+   
+   
 
+   
+   
+   
 
-
-
-
-
-
-
-
-
-
-
-
-
+   
+   
+   
 
 
 
@@ -29,3 +29,4 @@
 
    pypedream.core
    pypedream.exceptions
+
