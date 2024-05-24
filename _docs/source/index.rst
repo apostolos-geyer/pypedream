@@ -3,15 +3,11 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-pypedream :D
+pypedream
 ====================================
 A lightweight Python library for building workflows with modularity and observability.
 
 This library is under development and not ready for use. However, it aims to be useful for:
-
-- Developers iterating quickly on a pipeline without needing Airflow, Dagster, or similar platforms.
-- Those requiring modularity, version control, and robustness in their data processing beyond basic scripts.
-- Users whose pipelines can run on local hardware and do not need constant orchestration.
 
 Or maybe it will never be anything. Maybe one day someone will stumble on this documentation and wonder
 what might have been. It could be me, it could be you, it could be our children, or the aliens that
@@ -26,6 +22,7 @@ The answer is in the title of an Afroman song.
    :maxdepth: 2
    :caption: Contents:
 
+   about
    api
 
 .. autosummary::
