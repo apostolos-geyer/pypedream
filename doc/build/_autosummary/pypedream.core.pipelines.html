@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pypedream.core.pipelines &mdash; pypedream 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=d45e8c67"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="pypedream.core.stages" href="pypedream.core.stages.html" />
+    <link rel="prev" title="pypedream.core.context" href="pypedream.core.context.html" />
+</head>
+
+<body class="wy-body-for-nav">
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+
+          <a href="../index.html" class="icon icon-home">
+            pypedream
+              <img src="../_static/pypedream.webp" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pypedream.html">pypedream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypedream.exceptions.html">pypedream.exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypedream.core.html">pypedream.core</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">pypedream.core.pipelines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pypedream.core.pipelines.ExitPipeline"><code class="docutils literal notranslate"><span class="pre">ExitPipeline</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pypedream.core.pipelines.Parameters"><code class="docutils literal notranslate"><span class="pre">Parameters</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pypedream.core.pipelines.Parameters.UNSET_PARAMETER"><code class="docutils literal notranslate"><span class="pre">Parameters.UNSET_PARAMETER</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pypedream.core.pipelines.Parameters.parameter_set"><code class="docutils literal notranslate"><span class="pre">Parameters.parameter_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pypedream.core.pipelines.Parameters.parameters"><code class="docutils literal notranslate"><span class="pre">Parameters.parameters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pypedream.core.pipelines.Parameters.defaults"><code class="docutils literal notranslate"><span class="pre">Parameters.defaults</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pypedream.core.pipelines.Parameters.define"><code class="docutils literal notranslate"><span class="pre">Parameters.define()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pypedream.core.pipelines.Parameters.set"><code class="docutils literal notranslate"><span class="pre">Parameters.set()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pypedream.core.pipelines.Parameters.sets"><code class="docutils literal notranslate"><span class="pre">Parameters.sets()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pypedream.core.pipelines.Parameters.get"><code class="docutils literal notranslate"><span class="pre">Parameters.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pypedream.core.pipelines.Parameters.reset"><code class="docutils literal notranslate"><span class="pre">Parameters.reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pypedream.core.pipelines.Parameters.__getitem__"><code class="docutils literal notranslate"><span class="pre">Parameters.__getitem__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pypedream.core.pipelines.Parameters.__setitem__"><code class="docutils literal notranslate"><span class="pre">Parameters.__setitem__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">Parameters.defaults</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1"><code class="docutils literal notranslate"><span class="pre">Parameters.define()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2"><code class="docutils literal notranslate"><span class="pre">Parameters.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3"><code class="docutils literal notranslate"><span class="pre">Parameters.parameter_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4"><code class="docutils literal notranslate"><span class="pre">Parameters.parameters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5"><code class="docutils literal notranslate"><span class="pre">Parameters.reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6"><code class="docutils literal notranslate"><span class="pre">Parameters.set()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7"><code class="docutils literal notranslate"><span class="pre">Parameters.sets()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pypedream.core.pipelines.Pipeline"><code class="docutils literal notranslate"><span class="pre">Pipeline</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pypedream.core.pipelines.Pipeline.name"><code class="docutils literal notranslate"><span class="pre">Pipeline.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pypedream.core.pipelines.Pipeline.parameters"><code class="docutils literal notranslate"><span class="pre">Pipeline.parameters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pypedream.core.pipelines.Pipeline.variables"><code class="docutils literal notranslate"><span class="pre">Pipeline.variables</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pypedream.core.pipelines.Pipeline.stages"><code class="docutils literal notranslate"><span class="pre">Pipeline.stages</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pypedream.core.pipelines.Pipeline.logger"><code class="docutils literal notranslate"><span class="pre">Pipeline.logger</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pypedream.core.pipelines.Pipeline.stage"><code class="docutils literal notranslate"><span class="pre">Pipeline.stage()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8"><code class="docutils literal notranslate"><span class="pre">Pipeline.logger</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9"><code class="docutils literal notranslate"><span class="pre">Pipeline.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10"><code class="docutils literal notranslate"><span class="pre">Pipeline.parameters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pypedream.core.pipelines.Pipeline.run"><code class="docutils literal notranslate"><span class="pre">Pipeline.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pypedream.core.pipelines.Pipeline.run_stage"><code class="docutils literal notranslate"><span class="pre">Pipeline.run_stage()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11"><code class="docutils literal notranslate"><span class="pre">Pipeline.stage()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id12"><code class="docutils literal notranslate"><span class="pre">Pipeline.stages</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id13"><code class="docutils literal notranslate"><span class="pre">Pipeline.variables</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pypedream.core.pipelines.Variables"><code class="docutils literal notranslate"><span class="pre">Variables</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pypedream.core.pipelines.Variables.UNSET_VARIABLE"><code class="docutils literal notranslate"><span class="pre">Variables.UNSET_VARIABLE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pypedream.core.pipelines.Variables.variables"><code class="docutils literal notranslate"><span class="pre">Variables.variables</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pypedream.core.pipelines.Variables.defaults"><code class="docutils literal notranslate"><span class="pre">Variables.defaults</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pypedream.core.pipelines.Variables.define"><code class="docutils literal notranslate"><span class="pre">Variables.define()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pypedream.core.pipelines.Variables.set"><code class="docutils literal notranslate"><span class="pre">Variables.set()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pypedream.core.pipelines.Variables.sets"><code class="docutils literal notranslate"><span class="pre">Variables.sets()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pypedream.core.pipelines.Variables.get"><code class="docutils literal notranslate"><span class="pre">Variables.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pypedream.core.pipelines.Variables.reset"><code class="docutils literal notranslate"><span class="pre">Variables.reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pypedream.core.pipelines.Variables.__getitem__"><code class="docutils literal notranslate"><span class="pre">Variables.__getitem__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pypedream.core.pipelines.Variables.__setitem__"><code class="docutils literal notranslate"><span class="pre">Variables.__setitem__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id14"><code class="docutils literal notranslate"><span class="pre">Variables.defaults</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id15"><code class="docutils literal notranslate"><span class="pre">Variables.define()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id16"><code class="docutils literal notranslate"><span class="pre">Variables.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id17"><code class="docutils literal notranslate"><span class="pre">Variables.reset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id18"><code class="docutils literal notranslate"><span class="pre">Variables.set()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id19"><code class="docutils literal notranslate"><span class="pre">Variables.sets()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id20"><code class="docutils literal notranslate"><span class="pre">Variables.variables</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pypedream.core.stages.html">pypedream.core.stages</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">pypedream</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../api.html">API</a></li>
+          <li class="breadcrumb-item"><a href="pypedream.html">pypedream</a></li>
+          <li class="breadcrumb-item"><a href="pypedream.core.html">pypedream.core</a></li>
+      <li class="breadcrumb-item active">pypedream.core.pipelines</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_autosummary/pypedream.core.pipelines.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+
+  <section id="module-pypedream.core.pipelines">
+<span id="pypedream-core-pipelines"></span><h1>pypedream.core.pipelines<a class="headerlink" href="#module-pypedream.core.pipelines" title="Link to this heading"></a></h1>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pypedream.core.pipelines.Parameters" title="pypedream.core.pipelines.Parameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Parameters</span></code></a>([parameter_set, parameters, defaults])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pypedream.core.pipelines.Pipeline" title="pypedream.core.pipelines.Pipeline"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Pipeline</span></code></a>([name, parameters, variables, stages])</p></td>
+<td><p>A Pipeline is a collection of stages that are run in sequence.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pypedream.core.pipelines.Variables" title="pypedream.core.pipelines.Variables"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Variables</span></code></a>([variables, defaults])</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Exceptions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pypedream.core.pipelines.ExitPipeline" title="pypedream.core.pipelines.ExitPipeline"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExitPipeline</span></code></a>(message, error, *args)</p></td>
+<td><p>Exception to exit the pipeline</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pypedream.exceptions.html#pypedream.exceptions.InvalidParameterException" title="pypedream.core.pipelines.InvalidParameterException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InvalidParameterException</span></code></a></p></td>
+<td><p>Exception for trying to do something with a parameter that is not in the parameter set</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pypedream.exceptions.html#pypedream.exceptions.UndefinedParameterException" title="pypedream.core.pipelines.UndefinedParameterException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UndefinedParameterException</span></code></a></p></td>
+<td><p>Exception for trying to do something with a parameter that is not in the parameter set</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pypedream.exceptions.html#pypedream.exceptions.UndefinedVariableException" title="pypedream.core.pipelines.UndefinedVariableException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UndefinedVariableException</span></code></a></p></td>
+<td><p>Exception for trying to do something with a variable that is not in the variable set</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py exception">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.ExitPipeline">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypedream.core.pipelines.</span></span><span class="sig-name descname"><span class="pre">ExitPipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="k"><span class="pre">False</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pypedream.core.pipelines.ExitPipeline" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Exception to exit the pipeline</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Parameters">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypedream.core.pipelines.</span></span><span class="sig-name descname"><span class="pre">Parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameter_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">NOTHING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">NOTHING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defaults</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pypedream.core.pipelines.Parameters" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MutableMapping</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code>]</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Parameters.UNSET_PARAMETER">
+<span class="sig-name descname"><span class="pre">UNSET_PARAMETER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'UNSET_PARAMETER'</span></em><a class="headerlink" href="#pypedream.core.pipelines.Parameters.UNSET_PARAMETER" title="Link to this definition"></a></dt>
+<dd><p>A class to manage the parameters of a pipeline</p>
+<p>Ideally parameters are never set directly after the pipeline is initialized and values that need to be modified
+during a pipeline run are modified via Variables (not implemented but yk… ideally)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Parameters.parameter_set">
+<span class="sig-name descname"><span class="pre">parameter_set</span></span><a class="headerlink" href="#pypedream.core.pipelines.Parameters.parameter_set" title="Link to this definition"></a></dt>
+<dd><p>a set of allowed parameter names</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Iterable[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Parameters.parameters">
+<span class="sig-name descname"><span class="pre">parameters</span></span><a class="headerlink" href="#pypedream.core.pipelines.Parameters.parameters" title="Link to this definition"></a></dt>
+<dd><p>a dictionary of parameter names and values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Parameters.defaults">
+<span class="sig-name descname"><span class="pre">defaults</span></span><a class="headerlink" href="#pypedream.core.pipelines.Parameters.defaults" title="Link to this definition"></a></dt>
+<dd><p>a dictionary of default values for the parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Parameters.define">
+<span class="sig-name descname"><span class="pre">define</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">parameter_set:</span> <span class="pre">Iterable[str],</span> <span class="pre">\*\*defaults:</span> <span class="pre">dict</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pypedream.core.pipelines.Parameters" title="pypedream.core.pipelines.Parameters"><span class="pre">Parameters</span></a></span></span><a class="headerlink" href="#pypedream.core.pipelines.Parameters.define" title="Link to this definition"></a></dt>
+<dd><p>Define a Parameters object with the given parameter set and default values</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Parameters.set">
+<span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#pypedream.core.pipelines.Parameters.set" title="Link to this definition"></a></dt>
+<dd><p>sets a parameter in the pipeline if it is in the parameter set, otherwise raises an error</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Parameters.sets">
+<span class="sig-name descname"><span class="pre">sets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#pypedream.core.pipelines.Parameters.sets" title="Link to this definition"></a></dt>
+<dd><p>sets multiple parameters in the pipeline</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Parameters.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">must</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#pypedream.core.pipelines.Parameters.get" title="Link to this definition"></a></dt>
+<dd><p>gets a parameter from the pipeline.
+If the parameter is not in the parameter set it will error.
+If the parameter is not found, it will return UNSET_PARAMETER or error if must is True</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Parameters.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pypedream.core.pipelines.Parameters.reset" title="Link to this definition"></a></dt>
+<dd><p>Resets the values of all parameters, does not modify the parameter set.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Parameters.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#pypedream.core.pipelines.Parameters.__getitem__" title="Link to this definition"></a></dt>
+<dd><p>identical to get with dict like access but must is always false and
+will return UNSET_PARAMETER if the parameter is not found</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Parameters.__setitem__">
+<span class="sig-name descname"><span class="pre">__setitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#pypedream.core.pipelines.Parameters.__setitem__" title="Link to this definition"></a></dt>
+<dd><p>identical to set with dict like access</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">defaults</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id1">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">define</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameter_set</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">defaults</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pypedream.core.pipelines.Parameters" title="pypedream.core.pipelines.Parameters"><span class="pre">Parameters</span></a></span></span><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
+<dd><p>Define a Parameters object with the given parameter set and default values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parameter_set</strong> (<em>Iterable</em><em>[</em><em>str</em><em>]</em>) – the parameter set to use</p></li>
+<li><p><strong>defaults</strong> (<em>dict</em>) – default values for the parameters</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>a new Parameters object. The returned Parameters will have a parameter_set</em></p></li>
+<li><p>that is the union of any of the values provided in the <cite>parameter_set</cite> argument, and the keys</p></li>
+<li><p>of the <cite>defaults</cite> dictionary. The values of the <cite>defaults</cite> will be used as the default values</p></li>
+<li><p>for the parameters when <cite>reset</cite> is used.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">must</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#id2" title="Link to this definition"></a></dt>
+<dd><p>gets a parameter from the pipeline</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – the name of the parameter</p></li>
+<li><p><strong>must</strong> – whether to raise an error if the parameter is not found</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the value of the parameter</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">parameter_set</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id3" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">parameters</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id4" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id5" title="Link to this definition"></a></dt>
+<dd><p>Clears the values of all parameters, does not modify the parameter set.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id6">
+<span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#id6" title="Link to this definition"></a></dt>
+<dd><p>sets a parameter in the pipeline</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – the name of the parameter</p></li>
+<li><p><strong>value</strong> – the value of the parameter</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id7">
+<span class="sig-name descname"><span class="pre">sets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#id7" title="Link to this definition"></a></dt>
+<dd><p>sets multiple parameters in the pipeline</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>kwargs</strong> – a dictionary of parameters and values</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Pipeline">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypedream.core.pipelines.</span></span><span class="sig-name descname"><span class="pre">Pipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Pipeline'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pypedream.core.pipelines.Parameters" title="pypedream.core.pipelines.Parameters"><span class="pre">Parameters</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">NOTHING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variables</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pypedream.core.pipelines.Variables" title="pypedream.core.pipelines.Variables"><span class="pre">Variables</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">NOTHING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stages</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="pypedream.html#pypedream.Stage" title="pypedream.core.stages.Stage"><span class="pre">Stage</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">NOTHING</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pypedream.core.pipelines.Pipeline" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A Pipeline is a collection of stages that are run in sequence. It is the primary
+object for defining and running pipelines in the pypedream framework.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Pipeline.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#pypedream.core.pipelines.Pipeline.name" title="Link to this definition"></a></dt>
+<dd><p>the name of the pipeline</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Pipeline.parameters">
+<span class="sig-name descname"><span class="pre">parameters</span></span><a class="headerlink" href="#pypedream.core.pipelines.Pipeline.parameters" title="Link to this definition"></a></dt>
+<dd><p>a Parameters object that manages the parameters of the pipeline</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pypedream.core.pipelines.Parameters" title="pypedream.core.pipelines.Parameters">Parameters</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Pipeline.variables">
+<span class="sig-name descname"><span class="pre">variables</span></span><a class="headerlink" href="#pypedream.core.pipelines.Pipeline.variables" title="Link to this definition"></a></dt>
+<dd><p>a Variables object that manages the variables of the pipeline</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pypedream.core.pipelines.Variables" title="pypedream.core.pipelines.Variables">Variables</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Pipeline.stages">
+<span class="sig-name descname"><span class="pre">stages</span></span><a class="headerlink" href="#pypedream.core.pipelines.Pipeline.stages" title="Link to this definition"></a></dt>
+<dd><p>a dictionary mapping stage keys to Stage objects</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>StageTable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Pipeline.logger">
+<span class="sig-name descname"><span class="pre">logger</span></span><a class="headerlink" href="#pypedream.core.pipelines.Pipeline.logger" title="Link to this definition"></a></dt>
+<dd><p>a logger for the pipeline</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logging.Logger</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Pipeline.stage">
+<span class="sig-name descname"><span class="pre">stage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">\*\*kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span></span></span><a class="headerlink" href="#pypedream.core.pipelines.Pipeline.stage" title="Link to this definition"></a></dt>
+<dd><p>see the stage method for more information, registers a stage in the pipeline</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id8">
+<span class="sig-name descname"><span class="pre">logger</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Logger</span></em><a class="headerlink" href="#id8" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id9">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#id9" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id10">
+<span class="sig-name descname"><span class="pre">parameters</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pypedream.core.pipelines.Parameters" title="pypedream.core.pipelines.Parameters"><span class="pre">Parameters</span></a></em><a class="headerlink" href="#id10" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Pipeline.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pypedream.core.pipelines.Pipeline.run" title="Link to this definition"></a></dt>
+<dd><p>Runs all the stages in the pipeline in sequence
+The output of each stage is stored in the stages output</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>kwargs</strong> (<em>dict</em>) – keyword arguments to pass to the stages, overrides any configured inputs
+not validated so be careful</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>a dictionary of the outputs of each stage</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Pipeline.run_stage">
+<span class="sig-name descname"><span class="pre">run_stage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stage_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#pypedream.core.pipelines.Pipeline.run_stage" title="Link to this definition"></a></dt>
+<dd><p>Runs a stage in the pipeline, using the configured inputs and outputs
+The output of the stage is returned and also stored in the stages output</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stage_key</strong> (<em>str</em>) – the key of the stage to run</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – keyword arguments to pass to the stage, overrides any configured inputs
+not validated so be careful</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>the output of the stage</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id11">
+<span class="sig-name descname"><span class="pre">stage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">R</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">R</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#id11" title="Link to this definition"></a></dt>
+<dd><p>Registers a stage in the pipeline under the stage key <cite>name</cite> or under the name of the function if <cite>name</cite> is not provided</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name_or_callable</strong> (<em>str</em><em> | </em><em>Callable</em><em>, </em><em>optional</em>) – the name of the stage or the function to register as a stage</p></li>
+<li><p><strong>inputs</strong> (<em>list</em><em>[</em><a class="reference internal" href="pypedream.html#pypedream.Input" title="pypedream.Input"><em>Input</em></a><em>]</em><em>, </em><em>optional</em>)</p></li>
+<li><p><strong>output_mapper</strong> (<em>Callable</em><em>[</em><em>[</em><em>R</em><em>]</em><em>, </em><em>dict</em><em>[</em><em>str</em><em>, </em><em>Any</em><em>]</em><em>]</em><em>, </em><em>optional</em>) – a function that maps the return value of the stage to a dictionary
+of outputs. By default, this function returns a dictionary with a
+single key “return” that maps to the return value of the stage.</p></li>
+<li><p><strong>defaults</strong> (<em>dict</em>) – default values for arguments to the stage, these will be wrapped in StageInputMapping compliant objects and
+joined with the <cite>inputs</cite> parameter.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>A decorator that registers the function as a stage in the pipeline if <cite>name_or_callable</cite></p></li>
+<li><p><em>is a function, otherwise returns the function itself.</em></p></li>
+<li><p><em>Registering a function as a stage does not modify the actual function</em></p></li>
+<li><p><em>so it can still be used outside the framework.</em></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id12">
+<span class="sig-name descname"><span class="pre">stages</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="pypedream.html#pypedream.Stage" title="pypedream.core.stages.Stage"><span class="pre">Stage</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id12" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id13">
+<span class="sig-name descname"><span class="pre">variables</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pypedream.core.pipelines.Variables" title="pypedream.core.pipelines.Variables"><span class="pre">Variables</span></a></em><a class="headerlink" href="#id13" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Variables">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypedream.core.pipelines.</span></span><span class="sig-name descname"><span class="pre">Variables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variables</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">NOTHING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defaults</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pypedream.core.pipelines.Variables" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MutableMapping</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code>]</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Variables.UNSET_VARIABLE">
+<span class="sig-name descname"><span class="pre">UNSET_VARIABLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'UNSET_VARIABLE'</span></em><a class="headerlink" href="#pypedream.core.pipelines.Variables.UNSET_VARIABLE" title="Link to this definition"></a></dt>
+<dd><p>A class to manage the variables of a pipeline. Variables are values that can be modified during a pipeline run and are
+not set directly in the pipeline parameters. There is no “variable set” because variables can be added and removed at any time.
+If a variable is not found, it will return UNSET_VARIABLE or error if must is True</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Variables.variables">
+<span class="sig-name descname"><span class="pre">variables</span></span><a class="headerlink" href="#pypedream.core.pipelines.Variables.variables" title="Link to this definition"></a></dt>
+<dd><p>a dictionary of variable names and values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Variables.defaults">
+<span class="sig-name descname"><span class="pre">defaults</span></span><a class="headerlink" href="#pypedream.core.pipelines.Variables.defaults" title="Link to this definition"></a></dt>
+<dd><p>a dictionary of default values for the variables</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Variables.define">
+<span class="sig-name descname"><span class="pre">define</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">defaults</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pypedream.core.pipelines.Variables" title="pypedream.core.pipelines.Variables"><span class="pre">Variables</span></a></span></span><a class="headerlink" href="#pypedream.core.pipelines.Variables.define" title="Link to this definition"></a></dt>
+<dd><p>Define a Variables object with the given default values</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Variables.set">
+<span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#pypedream.core.pipelines.Variables.set" title="Link to this definition"></a></dt>
+<dd><p>sets a variable in the pipeline</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Variables.sets">
+<span class="sig-name descname"><span class="pre">sets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#pypedream.core.pipelines.Variables.sets" title="Link to this definition"></a></dt>
+<dd><p>sets multiple variables in the pipeline</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Variables.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">must</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#pypedream.core.pipelines.Variables.get" title="Link to this definition"></a></dt>
+<dd><p>gets a variable from the pipeline
+If the variable is not found, it will return UNSET_VARIABLE or error if must is True</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Variables.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pypedream.core.pipelines.Variables.reset" title="Link to this definition"></a></dt>
+<dd><p>Clears the values of all variables</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Variables.__getitem__">
+<span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#pypedream.core.pipelines.Variables.__getitem__" title="Link to this definition"></a></dt>
+<dd><p>identical to get with dict like access but must is always false and
+will return UNSET_VARIABLE if the variable is not found</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pypedream.core.pipelines.Variables.__setitem__">
+<span class="sig-name descname"><span class="pre">__setitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#pypedream.core.pipelines.Variables.__setitem__" title="Link to this definition"></a></dt>
+<dd><p>identical to set with dict like access</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id14">
+<span class="sig-name descname"><span class="pre">defaults</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id14" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id15">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">define</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">defaults</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pypedream.core.pipelines.Variables" title="pypedream.core.pipelines.Variables"><span class="pre">Variables</span></a></span></span><a class="headerlink" href="#id15" title="Link to this definition"></a></dt>
+<dd><p>Define a Variables object with the given default values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>defaults</strong> (<em>dict</em>) – default values for the variables</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>a new Variables object. The returned Variables will have the default values</em></p></li>
+<li><p>provided in the <cite>defaults</cite> dictionary. The values of the <cite>defaults</cite> will be used as the default values</p></li>
+<li><p>for the variables when <cite>reset</cite> is used.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id16">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">must</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#id16" title="Link to this definition"></a></dt>
+<dd><p>gets a variable from the pipeline</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – the name of the variable</p></li>
+<li><p><strong>must</strong> – whether to raise an error if the variable is not found</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the value of the variable</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id17">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#id17" title="Link to this definition"></a></dt>
+<dd><p>Clears the values of all variables</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id18">
+<span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#id18" title="Link to this definition"></a></dt>
+<dd><p>sets a variable in the pipeline</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – the name of the variable</p></li>
+<li><p><strong>value</strong> – the value of the variable</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id19">
+<span class="sig-name descname"><span class="pre">sets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#id19" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id20">
+<span class="sig-name descname"><span class="pre">variables</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id20" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pypedream.core.context.html" class="btn btn-neutral float-left" title="pypedream.core.context" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pypedream.core.stages.html" class="btn btn-neutral float-right" title="pypedream.core.stages" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Apostolos Geyer.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+</body>
+</html>
