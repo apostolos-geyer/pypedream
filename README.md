@@ -120,7 +120,3 @@ Cool? Cool. Until I reinvent the interface and forget to update the README.
 - [ ] Potentially replace everything and start over
 - [ ] Possibly make it more functional and use result types and optionals
 - [ ] Maybe use Scala instead (just kidding)
-
----
-
-The revised README now provides a clearer explanation of the library's purpose, usage, and future plans. It retains your engaging style while making it more accessible and professional.
