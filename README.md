@@ -1,5 +1,5 @@
 # pypedream
-<img src="./doc/source/_static/pypedream.webp" width=150 height=150>
+<img src="./docs/source/_static/pypedream.webp" width=150 height=150>
 
 
 A lightweight library for workflows in Python. Aims to remove the burden
