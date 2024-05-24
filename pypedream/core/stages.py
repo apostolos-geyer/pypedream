@@ -70,7 +70,7 @@ class OutputMapperBehaviour(Flag):
     " Map what can be mapped, ignore the rest (extra or missing).. just chill out. "
 
     PRESERVE = auto()
-    """ 
+    """
     Map what can be mapped explicitly as expected, and handle mapping of unexpected outputs in a way that preserves them.
     The key that unexpected outputs will be stored under is implementation specific.
     """

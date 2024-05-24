@@ -1,4 +1,6 @@
 # pypedream
+<img src="./doc/source/_static/pypedream.webp" width=150 height=150>
+
 
 A lightweight library for workflows in Python. Aims to remove the burden
 of setting up things like structured logging, configurability, access to shared context, and more, without using an orchestration platform.
@@ -52,10 +54,10 @@ You can chain them together like this:
 ```python
 import pypedream
 from pypedream import (
-    Pipeline, 
-    Parameters, 
-    Stage, 
-    Input, 
+    Pipeline,
+    Parameters,
+    Stage,
+    Input,
     InputBinding,
     KeyedInputMapper,
     DependencyInputMapper,
@@ -109,9 +111,9 @@ Cool? Cool. Until I reinvent the interface and forget to update the README.
 - [x] Pipeline object to use the function wrappers and provide variables to them (Pipeline object, which might be removed)
 - [ ] Logging configuration
 - [x] Specify a dependency on shared state that only exists within the context of a pipeline run (using contextvars)
-- [ ] Custom output stream object that replaces stdout at pipeline runtime so prints from stage functions get redirected into logging 
+- [ ] Custom output stream object that replaces stdout at pipeline runtime so prints from stage functions get redirected into logging
 - [x] Working linear pipeline
-- [ ] Explicitly define dependencies between stages and order of execution 
+- [ ] Explicitly define dependencies between stages and order of execution
 - [ ] Better ways to chain stages (currently only linear); support for higher-order patterns and concurrency patterns like map, reduce, broadcast, etc.
 - [ ] Jupyter notebook UI
 - [ ] Airflow compatibility: convert a pypedream workflow into an Airflow DAG

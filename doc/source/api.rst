@@ -5,9 +5,9 @@ API
    :toctree: _autosummary
    :recursive:
 
+
    pypedream
+   pypedream.exceptions
    pypedream.core
-   pypedream.core.context
    pypedream.core.pipelines
    pypedream.core.stages
-

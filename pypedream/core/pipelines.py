@@ -57,7 +57,7 @@ class Parameters(MutableMapping[str, Any]):
     """
     A class to manage the parameters of a pipeline
 
-    Ideally parameters are never set directly after the pipeline is initialized and values that need to be modified 
+    Ideally parameters are never set directly after the pipeline is initialized and values that need to be modified
     during a pipeline run are modified via Variables (not implemented but yk... ideally)
 
     Attributes
@@ -75,23 +75,23 @@ class Parameters(MutableMapping[str, Any]):
     -------
     define(parameter_set: Iterable[str], **defaults: dict) -> Parameters
         Define a Parameters object with the given parameter set and default values
-    
+
     set(name: str, value: Any) -> None
         sets a parameter in the pipeline if it is in the parameter set, otherwise raises an error
 
     sets(**kwargs: Any) -> None
         sets multiple parameters in the pipeline
-        
+
     get(name: str, must: bool = False) -> Any
-        gets a parameter from the pipeline. 
-        If the parameter is not in the parameter set it will error. 
+        gets a parameter from the pipeline.
+        If the parameter is not in the parameter set it will error.
         If the parameter is not found, it will return UNSET_PARAMETER or error if must is True
 
     reset()
         Resets the values of all parameters, does not modify the parameter set.
 
     __getitem__(name: str) -> Any
-        identical to get with dict like access but must is always false and 
+        identical to get with dict like access but must is always false and
         will return UNSET_PARAMETER if the parameter is not found
 
     __setitem__(name: str, value: Any) -> None
@@ -241,12 +241,12 @@ class Variables(MutableMapping[str, Any]):
         Clears the values of all variables
 
     __getitem__(name: str) -> Any
-        identical to get with dict like access but must is always false and 
+        identical to get with dict like access but must is always false and
         will return UNSET_VARIABLE if the variable is not found
 
     __setitem__(name: str, value: Any) -> None
         identical to set with dict like access
-        
+
     """
 
     variables: dict[str, Any] = field(factory=dict)
@@ -301,7 +301,9 @@ class Variables(MutableMapping[str, Any]):
             must,
         ):
             case (v, True) if v == check:
-                raise UndefinedVariableException(f"Variable {name} not found in pipeline variables")
+                raise UndefinedVariableException(
+                    f"Variable {name} not found in pipeline variables"
+                )
             case (_, _):
                 return value
 
@@ -390,7 +392,7 @@ class Pipeline:
         *inputargs: StageInputs,
         inputs: StageInputs | None = None,
         output_mapper: Callable[[R], dict[str, Any]] | None = None,
-        name = None,
+        name=None,
         **defaults: P.kwargs,
     ) -> Callable[[Callable[P, R]], Callable[P, R]] | Callable[P, R]:
         """
