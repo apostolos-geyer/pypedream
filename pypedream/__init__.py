@@ -1,3 +1,11 @@
+"""
+pypedream
+rule #1 is have fun
+rule #2 is don't forget rule #1
+rule #3 is dont ask me where the unit tests are, there are none.
+
+#readthedocs
+"""
 from . import core as core
 from . import exceptions
 from .core import context

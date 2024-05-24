@@ -18,6 +18,7 @@ sphinx-autodoc-typehints = "^2.1.0"
 pydata-sphinx-theme = "^0.15.2"
 sphinx-autobuild = "^2024.4.16"
 sphinx-rtd-theme = "^2.0.0"
+pre-commit = "^3.7.1"
 
 [build-system]
 requires = ["poetry-core"]

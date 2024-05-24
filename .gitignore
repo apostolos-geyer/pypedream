@@ -2,6 +2,11 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,windows,linux,python,visualstudiocode,jupyternotebooks
 
 poetry.lock
+.vscode
+*/.vscode
+**/.vscode
+**/*.vscode
+.vscode/*
 
 ### JupyterNotebooks ###
 # gitignore template for Jupyter Notebooks
