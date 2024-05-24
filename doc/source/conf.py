@@ -12,9 +12,9 @@ import pydata_sphinx_theme # noqa
 sys.path.insert(0, os.path.abspath('../..'))
 sys.path.insert(0, os.path.abspath('../../src'))
 
-import pypelite # noqa
+import pypedream # noqa
 
-project = 'pypeLite'
+project = 'pypedream'
 copyright = '2024, Apostolos Geyer'
 author = 'Apostolos Geyer'
 release = '0.0.1'

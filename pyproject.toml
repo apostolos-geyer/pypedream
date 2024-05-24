@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "pypelite"
+name = "pypedream"
 version = "0.0.1"
 description = "lightweight way of coordinating various functions into pipelines for quick iteration and testing before you want to move on to a real orchestration framework."
 authors = ["apostoli <79337131+apostolos-geyer@users.noreply.github.com>"]

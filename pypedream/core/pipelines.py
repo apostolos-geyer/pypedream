@@ -1,35 +1,58 @@
 import logging
-from typing import Callable, ParamSpec, TypeVar, overload, Any, Iterable
+from collections.abc import MutableMapping
+from typing import Any, Callable, Iterable, ParamSpec, TypeVar, overload
 
 from attrs import define, field
 
-from pypelite.core.stage import Stage
-from pypelite.core.stage.inputs import (
-    DefaultInput,
-    DependencyInput,
-    KeyedInput,
-    bind_inputs,
-    prepare_inputs,
-)
-
-from pypelite.core.stage.annotation import (
-    StageTable,
+from pypedream.core import context
+from pypedream.core.stages import (
+    Stage,
     StageInputs,
-    StageOutputMapper,
+    StageTable,
+    prepare_inputs,
 )
 
 __all__ = [
     "Pipeline",
     "Parameters",
     "Variables",
+    "ExitPipeline",
 ]
 
 P = ParamSpec("P")
 R = TypeVar("R")
 
 
+class ExitPipeline(Exception):
+    """
+    Exception to exit the pipeline
+    """
+
+    def __init__(self, message: str, error: False, *args):
+        self.message = message
+        super().__init__(*args)
+
+
+class InvalidParameterException(KeyError):
+    """
+    Exception for trying to do something with a parameter that is not in the parameter set
+    """
+
+
+class UndefinedParameterException(KeyError):
+    """
+    Exception for trying to do something with a parameter that is not in the parameter set
+    """
+
+
+class UndefinedVariableException(KeyError):
+    """
+    Exception for trying to do something with a variable that is not in the variable set
+    """
+
+
 @define
-class Parameters:
+class Parameters(MutableMapping[str, Any]):
     UNSET_PARAMETER = "UNSET_PARAMETER"
     """
     A class to manage the parameters of a pipeline
@@ -79,7 +102,9 @@ class Parameters:
     defaults: dict[str, Any] = field(default={})
 
     @classmethod
-    def define(cls, parameter_set: Iterable[str], **defaults: Any) -> "Parameters":
+    def define(
+        cls, parameter_set: Iterable[str] | None = None, **defaults: Any
+    ) -> "Parameters":
         """
         Define a Parameters object with the given parameter set and default values
 
@@ -99,6 +124,7 @@ class Parameters:
         for the parameters when `reset` is used.
 
         """
+        parameter_set = parameter_set or set()
         parameter_set = set(parameter_set).union(set(defaults.keys()))
         pp = cls(parameter_set=parameter_set, defaults=defaults)
         pp.sets(**defaults)
@@ -112,7 +138,7 @@ class Parameters:
         :param value: the value of the parameter
         """
         if name not in self.parameter_set:
-            raise ValueError(
+            raise InvalidParameterException(
                 f"Attempting to set parameter {name} not found in pipeline parameters"
             )
 
@@ -125,7 +151,7 @@ class Parameters:
         :param kwargs: a dictionary of parameters and values
         """
         if any(name not in self.parameter_set for name in kwargs):
-            raise ValueError(
+            raise InvalidParameterException(
                 f"Attempting to set parameters {[name for name in kwargs if name not in self.parameter_set]} not found in pipeline parameters"
             )
 
@@ -140,30 +166,37 @@ class Parameters:
         :returns: the value of the parameter
         """
         if name not in self.parameter_set:
-            raise ValueError(
+            raise InvalidParameterException(
                 f"Attempting to retrieve undeclared parameter {name} from pipeline parameters"
             )
         match (
             value := self.parameters.get(
-                name, (check := default or self.UNSET_PARAMETER)
+                name,
+                (check := (default if default is not None else self.UNSET_PARAMETER)),
             ),
             must,
         ):
             case (v, True) if v == check:
-                raise ValueError(
-                    f"Declared but unset paramater {name} not found in pipeline parameters"
+                raise UndefinedParameterException(
+                    f"Declared paramater {name} has not been defined"
                 )
             case (_, _):
                 return value
 
     def __getitem__(self, name: str) -> Any:
-        return self.get(name)
+        return self.get(name, must=True)
 
     def __setitem__(self, name: str, value: Any) -> None:
         self.set(name, value)
 
-    def __contains__(self, name: str) -> bool:
-        return name in self.parameters
+    def __delitem__(self, name: str) -> None:
+        del self.parameters[name]
+
+    def __iter__(self) -> Iterable[str]:
+        return iter(self.parameters)
+
+    def __len__(self) -> int:
+        return len(self.parameters)
 
     def reset(self):
         """
@@ -174,7 +207,7 @@ class Parameters:
 
 
 @define
-class Variables:
+class Variables(MutableMapping[str, Any]):
     UNSET_VARIABLE = "UNSET_VARIABLE"
     """
     A class to manage the variables of a pipeline. Variables are values that can be modified during a pipeline run and are
@@ -262,23 +295,30 @@ class Variables:
         """
         match (
             value := self.variables.get(
-                name, (check := (default or self.UNSET_VARIABLE))
+                name,
+                (check := (default if default is not None else self.UNSET_VARIABLE)),
             ),
             must,
         ):
             case (v, True) if v == check:
-                raise ValueError(f"Variable {name} not found in pipeline variables")
+                raise UndefinedVariableException(f"Variable {name} not found in pipeline variables")
             case (_, _):
                 return value
 
     def __getitem__(self, name: str) -> Any:
-        return self.get(name)
+        return self.get(name, must=True)
 
     def __setitem__(self, name: str, value: Any) -> None:
         self.set(name, value)
 
-    def __contains__(self, name: str) -> bool:
-        return name in self.variables
+    def __delitem__(self, name: str) -> None:
+        del self.variables[name]
+
+    def __iter__(self) -> Iterable[str]:
+        return iter(self.variables)
+
+    def __len__(self) -> int:
+        return len(self.variables)
 
     def reset(self):
         """
@@ -292,7 +332,7 @@ class Variables:
 class Pipeline:
     """
     A Pipeline is a collection of stages that are run in sequence. It is the primary
-    object for defining and running pipelines in the pypelite framework.
+    object for defining and running pipelines in the pypedream framework.
 
     Attributes
     ----------
@@ -321,55 +361,8 @@ class Pipeline:
     name: str = field(default="Pipeline")
     parameters: Parameters = field(factory=Parameters)
     variables: Variables = field(factory=Variables)
-    stages: StageTable = field(default={})
+    stages: StageTable = field(factory=dict)
     logger: logging.Logger = field(init=False)
-
-    @overload
-    def stage(
-        self,
-        name: str | None = None,
-        *,
-        use_defaults: list[DefaultInput] | None = None,
-        use_stages: list[DependencyInput] | None = None,
-        use_variables: list[KeyedInput] | None = None,
-        use_parameters: list[KeyedInput] | None = None,
-        output_mapper: StageOutputMapper | None = None,
-        **defaults: P.kwargs,
-    ) -> Callable[[Callable[P, R]], Callable[P, R]]:
-        """
-        Registers a stage in the pipeline under the stage key `name` or under the name of the function if `name` is not provided
-
-        Parameters
-        ----------
-        name : str, optional
-            the name of the stage
-
-        use_defaults: list[DefaultInput], optional
-            the default values to use from the pipeline,
-
-        use_stages: list[DependencyInput], optional
-            the outputs to use from the pipeline,
-
-        use_variables: list[KeyedInput], optional
-            the variables to use from the pipeline,
-
-        use_parameters: list[KeyedInput], optional
-            the parameters to use from the pipeline,
-
-        output_mapper : StageOutputMapper, optional
-            a function that maps the return value of the stage to a dictionary
-            of outputs. By default, this function returns a dictionary with a
-            single key "return" that maps to the return value of the stage.
-
-        defaults : dict
-            default values for arguments to the stage, these will be wrapped in StageInputMapping compliant objects and
-            joined with the `use_defaults` parameter.
-
-        Returns
-        -------
-        A decorator that registers the function as a stage in the pipeline.
-        """
-        ...
 
     @overload
     def stage(
@@ -393,12 +386,11 @@ class Pipeline:
     def stage(
         self,
         name_or_callable: str | Callable[P, R] | None = None,
-        *,
-        use_defaults: list[DefaultInput] | None = None,
-        use_stages: list[DependencyInput] | None = None,
-        use_variables: list[KeyedInput] | None = None,
-        use_parameters: list[KeyedInput] | None = None,
-        output_mapper: StageOutputMapper | None = None,
+        /,
+        *inputargs: StageInputs,
+        inputs: StageInputs | None = None,
+        output_mapper: Callable[[R], dict[str, Any]] | None = None,
+        name = None,
         **defaults: P.kwargs,
     ) -> Callable[[Callable[P, R]], Callable[P, R]] | Callable[P, R]:
         """
@@ -409,19 +401,9 @@ class Pipeline:
         name_or_callable : str | Callable, optional
             the name of the stage or the function to register as a stage
 
-        use_defaults: list[DefaultInput], optional
-            the default values to use from the pipeline,
+        inputs: list[Input], optional
 
-        use_stages: list[DependencyInput], optional
-            the outputs to use from the pipeline,
-
-        use_variables: list[KeyedInput], optional
-            the variables to use from the pipeline,
-
-        use_parameters: list[KeyedInput], optional
-            the parameters to use from the pipeline,
-
-        output_mapper : StageOutputMapper, optional
+        output_mapper : Callable[[R], dict[str, Any]], optional
             a function that maps the return value of the stage to a dictionary
             of outputs. By default, this function returns a dictionary with a
             single key "return" that maps to the return value of the stage.
@@ -438,14 +420,8 @@ class Pipeline:
         so it can still be used outside the framework.
         """
 
-        stage_key = None
-        use_defaults = (use_defaults or []) + [
-            DefaultInput(as_arg=key, value=defaults[key]) for key in defaults
-        ]
-        use_stages = bind_inputs((use_stages or []), self.stages)
-        use_variables = bind_inputs((use_variables or []), self.variables)
-        use_parameters = bind_inputs((use_parameters or []), self.parameters)
-        inputs: StageInputs = use_defaults + use_stages + use_variables + use_parameters
+        stage_key = name or None
+        inputs = list(inputargs) + (inputs or [])
 
         def decorator(func: Callable[P, R]) -> Callable[P, R]:
             nonlocal stage_key, inputs
@@ -459,6 +435,8 @@ class Pipeline:
                 self.stages[stage_key] = Stage(
                     function=func, inputs=inputs, output_mapper=output_mapper
                 )
+
+            return func
 
         if isinstance(name_or_callable, str):
             stage_key = name_or_callable
@@ -488,6 +466,13 @@ class Pipeline:
         -------
         the output of the stage
         """
+
+        ptoken = context.PIPELINE.set(self)
+        sstoken = context.STAGES.set(self.stages)
+        stoken = context.STAGE.set(self.stages[stage_key])
+        vtoken = context.VARIABLES.set(self.variables)
+        patoken = context.PARAMETERS.set(self.parameters)
+
         stage = self.stages[stage_key]
         inputs = prepare_inputs(stage.inputs)
         inputs.update(kwargs)
@@ -495,8 +480,15 @@ class Pipeline:
         mapped_output = stage.output_mapper(output)
         self.stages[stage_key].outputs = mapped_output
         self.stages[stage_key].has_run = True
+
+        context.PIPELINE.reset(ptoken)
+        context.STAGES.reset(sstoken)
+        context.STAGE.reset(stoken)
+        context.VARIABLES.reset(vtoken)
+        context.PARAMETERS.reset(patoken)
+
         return output
-    
+
     def run(self, **kwargs: Any) -> dict[str, Any]:
         """
         Runs all the stages in the pipeline in sequence
@@ -516,7 +508,3 @@ class Pipeline:
         for stage_key in self.stages:
             outputs[stage_key] = self.run_stage(stage_key, **kwargs)
         return outputs
-
-
-
-        

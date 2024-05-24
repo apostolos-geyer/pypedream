@@ -5,8 +5,9 @@ API
    :toctree: _autosummary
    :recursive:
 
-   pypelite
-   pypelite.core
-   pypelite.core.pipeline
-   pypelite.core.stage
+   pypedream
+   pypedream.core
+   pypedream.core.context
+   pypedream.core.pipelines
+   pypedream.core.stages
 

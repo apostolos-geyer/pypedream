@@ -1,7 +1,7 @@
-﻿pypelite
-========
+﻿pypedream
+=========
 
-.. automodule:: pypelite
+.. automodule:: pypedream
 
    
    
@@ -27,5 +27,6 @@
    :toctree:
    :recursive:
 
-   pypelite.core
+   pypedream.core
+   pypedream.exceptions
 

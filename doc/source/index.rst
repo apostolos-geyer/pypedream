@@ -1,9 +1,9 @@
-.. pypeLite documentation master file, created by
+.. pypedream documentation master file, created by
    sphinx-quickstart on Thu May 23 10:13:57 2024.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to pypeLite's documentation!
+Welcome to pypedream's documentation!
 ====================================
 
 .. toctree::
