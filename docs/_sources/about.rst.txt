@@ -25,7 +25,8 @@ I was working on a client project involving continuous data processing through d
 - Configurable via user-set parameters before running.
 - Conducive to modularity and version control.
 
-While these workloads might scale and run regularly in the future, potentially using Airflow, they don't need to right now—and they might never. Personally, I enjoy setting up Airflow for local development, complete with shell scripts for machine configuration and `docker-compose`. However, my team consists of me and my dad. My dad is a brilliant statistician and consultant and more technical than most people, but he uses Anaconda Navigator. He just wants to focus on the analysis logic.
+While these workloads might scale and run regularly in the future, potentially using Airflow, they don't need to right now—and they might never. Personally, I enjoy setting up Airflow for local development, complete with shell scripts for machine configuration and `docker-compose`. However, my team consists of me and my dad. 
+My dad is a brilliant statistician and consultant and more technical than most people, but he uses Anaconda Navigator—i.e, he does not revel in configuring environments and setting up platforms, he just wants to focus on the analysis logic, and rightly so.
 
 Thus, we needed a framework that sits in the middle, requiring nothing beyond Python.
 
