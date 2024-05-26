@@ -635,6 +635,7 @@ class Stage(Generic[P, R]):
         inputs.update(kwargs)
         with logging_context(**logctx):
             output = self.function(**inputs)
+
         self.outputs = self.output_mapper(output)
         self.has_run = True
         return output
