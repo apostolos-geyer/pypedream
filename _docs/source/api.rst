@@ -5,6 +5,7 @@ API
    :toctree: _autosummary
 
    pypedream
+   pypedream.input
    pypedream.ctx
    pypedream.logging
    pypedream.exceptions
