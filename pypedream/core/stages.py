@@ -268,8 +268,7 @@ class KeyedOutputMapper:
         a flag indicating how to handle unexpected outputs in the input dictionary.
         - `STRICT`: raise an error if a key in the input dictionary is not in `self.keys`
         - `CHILL`: map what can be mapped, ignore the rest (extra or missing).. just chill out.
-        - `PRESERVE`: Extra outputs will be stored under the key that they were found under in the input dictionary.
-            User should be careful to avoid key conflicts.
+        - `PRESERVE`: Extra outputs will be stored under the key that they were found under in the input dictionary. User should be careful to avoid key conflicts.
         - `WARN_UNEXPECTED`: log a warning on unexpected outputs. This should be used in conjunction with another behaviour.
     """
 

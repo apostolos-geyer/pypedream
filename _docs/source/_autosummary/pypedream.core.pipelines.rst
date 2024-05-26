@@ -17,6 +17,7 @@ pypedream.core.pipelines
 
    .. autosummary::
    
+      LoggerSettings
       Parameters
       Pipeline
       Variables

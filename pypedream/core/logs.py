@@ -26,7 +26,23 @@ from structlog.stdlib import (
 )
 from structlog.contextvars import bound_contextvars
 
-logging_context = bound_contextvars
+
+def logging_context(**kw):
+    """
+    A wrapper of `structlog.contextvars.bound_contextvars`.
+
+    Creates a context manager in which the given key-value pairs are set as
+    contextvars that will be added to any log messages emitted within the
+    context manager.
+
+    Just wanted to rename it for purposes of clarity, and also so that
+    their 'Added in version twenty something' notes don't show up in the docs.
+
+    Shoutout hynek.
+
+    :see https://www.structlog.org/en/stable/contextvars.html:
+    """
+    return bound_contextvars(**kw)
 
 
 DEFAULT_SHARED_PROCESSORS: list[structlog.types.Processor] = [

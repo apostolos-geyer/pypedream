@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>pypedream.exceptions &#8212; pypedream 0.0.1 documentation</title>
+    <title>pypedream.core.logs &#8212; pypedream 0.0.1 documentation</title>
   
   
   
@@ -38,11 +38,12 @@
     <script src="../_static/documentation_options.js?v=d45e8c67"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/pypedream.exceptions';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/pypedream.core.logs';</script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="pypedream.core.stages" href="pypedream.core.stages.html" />
+    <link rel="next" title="pypedream.core.pipelines" href="pypedream.core.pipelines.html" />
+    <link rel="prev" title="pypedream.core.context" href="pypedream.core.context.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -287,20 +288,20 @@
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="pypedream.html">pypedream</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 has-children"><a class="reference internal" href="pypedream.core.html">pypedream.core</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="pypedream.core.html">pypedream.core</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="pypedream.core.context.html">pypedream.core.context</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pypedream.core.logs.html">pypedream.core.logs</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">pypedream.core.logs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pypedream.core.pipelines.html">pypedream.core.pipelines</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pypedream.core.stages.html">pypedream.core.stages</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">pypedream.exceptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypedream.exceptions.html">pypedream.exceptions</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">pypedream.exceptions</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="pypedream.core.html">pypedream.core</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1"><a class="reference internal" href="pypedream.exceptions.html">pypedream.exceptions</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="pypedream.core.html">pypedream.core</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="pypedream.core.context.html">pypedream.core.context</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pypedream.core.logs.html">pypedream.core.logs</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">pypedream.core.logs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pypedream.core.pipelines.html">pypedream.core.pipelines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pypedream.core.stages.html">pypedream.core.stages</a></li>
 </ul>
@@ -336,6 +337,8 @@
 
 
 
+
+
 <nav aria-label="Breadcrumb">
   <ul class="bd-breadcrumbs">
     
@@ -348,9 +351,12 @@
     <li class="breadcrumb-item"><a href="../api.html" class="nav-link">API</a></li>
     
     
-    <li class="breadcrumb-item"><a href="pypedream.html" class="nav-link">pypedream</a></li>
+    <li class="breadcrumb-item"><i class="fa-solid fa-ellipsis"></i></li>
     
-    <li class="breadcrumb-item active" aria-current="page">pypedream.exceptions</li>
+    
+    <li class="breadcrumb-item"><a href="pypedream.core.html" class="nav-link">pypedream.core</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">pypedream.core.logs</li>
   </ul>
 </nav>
 </div>
@@ -367,47 +373,62 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="module-pypedream.exceptions">
-<span id="pypedream-exceptions"></span><h1>pypedream.exceptions<a class="headerlink" href="#module-pypedream.exceptions" title="Link to this heading">#</a></h1>
-<p>pypedream.exceptions re exports the exceptions from pypedream.core.stages and pypedream.core.pipelines. just for namespacing.</p>
-<dl class="py exception">
-<dt class="sig sig-object py" id="pypedream.exceptions.ExitPipeline">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypedream.exceptions.</span></span><span class="sig-name descname"><span class="pre">ExitPipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="k"><span class="pre">False</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pypedream.exceptions.ExitPipeline" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
-<p>Exception to exit the pipeline</p>
+  <section id="module-pypedream.core.logs">
+<span id="pypedream-core-logs"></span><h1>pypedream.core.logs<a class="headerlink" href="#module-pypedream.core.logs" title="Link to this heading">#</a></h1>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pypedream.core.logs.logging_context" title="pypedream.core.logs.logging_context"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logging_context</span></code></a>(**kw)</p></td>
+<td><p>A wrapper of <cite>structlog.contextvars.bound_contextvars</cite>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pypedream.core.logs.stdstructlogger" title="pypedream.core.logs.stdstructlogger"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stdstructlogger</span></code></a>(name[, stream, log_dir, ...])</p></td>
+<td><p>Get a structlog logger using stdlib loggers with the specified name and configure it.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="pypedream.core.logs.logging_context">
+<span class="sig-prename descclassname"><span class="pre">pypedream.core.logs.</span></span><span class="sig-name descname"><span class="pre">logging_context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pypedream.core.logs.logging_context" title="Link to this definition">#</a></dt>
+<dd><p>A wrapper of <cite>structlog.contextvars.bound_contextvars</cite>.</p>
+<p>Creates a context manager in which the given key-value pairs are set as
+contextvars that will be added to any log messages emitted within the
+context manager.</p>
+<p>Just wanted to rename it for purposes of clarity, and also so that
+their ‘Added in version twenty something’ notes don’t show up in the docs.</p>
+<p>Shoutout hynek.</p>
+<dl class="field-list simple">
+<dt class="field-odd">See https://www.structlog.org/en/stable/contextvars.html<a class="reference external" href="https://www.structlog.org/en/stable/contextvars.html">https://www.structlog.org/en/stable/contextvars.html</a><span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
 </dd></dl>
 
-<dl class="py exception">
-<dt class="sig sig-object py" id="pypedream.exceptions.InvalidParameterException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypedream.exceptions.</span></span><span class="sig-name descname"><span class="pre">InvalidParameterException</span></span><a class="headerlink" href="#pypedream.exceptions.InvalidParameterException" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">KeyError</span></code></p>
-<p>Exception for trying to do something with a parameter that is not in the parameter set</p>
-</dd></dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="pypedream.exceptions.UnboundInputException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypedream.exceptions.</span></span><span class="sig-name descname"><span class="pre">UnboundInputException</span></span><a class="headerlink" href="#pypedream.exceptions.UnboundInputException" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
-</dd></dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="pypedream.exceptions.UndefinedInputException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypedream.exceptions.</span></span><span class="sig-name descname"><span class="pre">UndefinedInputException</span></span><a class="headerlink" href="#pypedream.exceptions.UndefinedInputException" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
-</dd></dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="pypedream.exceptions.UndefinedParameterException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypedream.exceptions.</span></span><span class="sig-name descname"><span class="pre">UndefinedParameterException</span></span><a class="headerlink" href="#pypedream.exceptions.UndefinedParameterException" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">KeyError</span></code></p>
-<p>Exception for trying to do something with a parameter that is not in the parameter set</p>
-</dd></dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="pypedream.exceptions.UndefinedVariableException">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypedream.exceptions.</span></span><span class="sig-name descname"><span class="pre">UndefinedVariableException</span></span><a class="headerlink" href="#pypedream.exceptions.UndefinedVariableException" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">KeyError</span></code></p>
-<p>Exception for trying to do something with a variable that is not in the variable set</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pypedream.core.logs.stdstructlogger">
+<span class="sig-prename descclassname"><span class="pre">pypedream.core.logs.</span></span><span class="sig-name descname"><span class="pre">stdstructlogger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stream</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">PathLike</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">PosixPath('/Users/superuser/Desktop/personalProjects/pypedream/_docs/source')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">PathLike</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handlers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">Handler</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">BoundLogger</span></span></span><a class="headerlink" href="#pypedream.core.logs.stdstructlogger" title="Link to this definition">#</a></dt>
+<dd><p>Get a structlog logger using stdlib loggers with the specified name and configure it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name of the logger</p></li>
+<li><p><strong>stream</strong> (<em>bool</em><em> | </em><em>Any</em>) – If True, a structlog logger will be created using their rich console logger configured with what I believe are sensible defaults.
+If False, no console logger will be added.
+Otherwise, the value should be an io stream that can be passed into the constructor of a logging.StreamHandler</p></li>
+<li><p><strong>log_dir</strong> (<em>Path</em><em> | </em><em>PathLike</em>) – The directory to write log files to. This is only used if file is True or a string. Defaults to the current working directory.</p></li>
+<li><p><strong>file</strong> (<em>bool</em><em> | </em><em>Path</em><em> | </em><em>PathLike</em><em> | </em><em>str</em>) – If True, a structlog logger will be created to write json logs to a file named ‘{name}_{datetime.datetime.now().isoformat()}.log’ in the specified log_dir.
+If False, no file logger will be added.
+If it is a Path or PathLike object, the logger will write json logs to the specified file, ignoring the log_dir parameter.
+If it is a string, the logger will write json logs to a file named ‘{file}’ in the specified log_dir.</p></li>
+<li><p><strong>handlers</strong> (<em>list</em><em>[</em><em>logging.Handler</em><em>] </em><em>| </em><em>None</em>) – A list of logging handlers to add to the logger. If None, no additional handlers will be added.
+If not none, this will override the stream and file parameters.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A structlog logger configured with the specified handlers.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>structlog.stdlib.BoundLogger</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -423,13 +444,22 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="pypedream.core.stages.html"
+       href="pypedream.core.context.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">pypedream.core.stages</p>
+        <p class="prev-next-title">pypedream.core.context</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="pypedream.core.pipelines.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">pypedream.core.pipelines</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -449,19 +479,15 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pypedream.exceptions.ExitPipeline"><code class="docutils literal notranslate"><span class="pre">ExitPipeline</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pypedream.exceptions.InvalidParameterException"><code class="docutils literal notranslate"><span class="pre">InvalidParameterException</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pypedream.exceptions.UnboundInputException"><code class="docutils literal notranslate"><span class="pre">UnboundInputException</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pypedream.exceptions.UndefinedInputException"><code class="docutils literal notranslate"><span class="pre">UndefinedInputException</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pypedream.exceptions.UndefinedParameterException"><code class="docutils literal notranslate"><span class="pre">UndefinedParameterException</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pypedream.exceptions.UndefinedVariableException"><code class="docutils literal notranslate"><span class="pre">UndefinedVariableException</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pypedream.core.logs.logging_context"><code class="docutils literal notranslate"><span class="pre">logging_context()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pypedream.core.logs.stdstructlogger"><code class="docutils literal notranslate"><span class="pre">stdstructlogger()</span></code></a></li>
 </ul>
   </nav></div>
 
   <div class="sidebar-secondary-item">
 
   <div class="tocsection sourcelink">
-    <a href="../_sources/_autosummary/pypedream.exceptions.rst.txt">
+    <a href="../_sources/_autosummary/pypedream.core.logs.rst.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>

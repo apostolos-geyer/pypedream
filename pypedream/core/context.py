@@ -1,6 +1,5 @@
 """
-pypedream.core.context contains context variables used to store the current pipeline, variables, parameters, stages,
-stage, stdout, and stderr. It also contains a function to apply defaults to the context variables.
+pypedream.core.context contains context variables used to store the current pipeline.
 
 When a stage is run by a pipeline, the pipeline runs it in a context that contains all the information needed to run
 the stage and bind its inputs and outputs.
