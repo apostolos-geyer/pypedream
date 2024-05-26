@@ -1,24 +1,31 @@
 from contextvars import ContextVar
-from typing import Callable, Generic, Literal, ParamSpec, TypeVar, Any
-from textwrap import dedent
-
-from attrs import define, field
-
 from enum import Flag, auto
 from functools import cached_property
-from typing import Mapping, Sequence
+from textwrap import dedent
+from typing import (
+    Any,
+    Callable,
+    Generic,
+    Literal,
+    Mapping,
+    ParamSpec,
+    Sequence,
+    TypeAlias,
+    TypeVar,
+)
 
-from attrs import frozen
+from attrs import define, field, frozen
 
+from pypedream.core.logs import logging_context
 
 P = ParamSpec("P")
 R = TypeVar("R")
 T = TypeVar("T")
 
-StageKey = str
-StageInputs = list["Input"]
-StageOutputs = dict[str, Any]
-StageTable = dict[StageKey, "Stage"]
+StageKey: TypeAlias = str
+StageInputs: TypeAlias = list["Input"]
+StageOutputs: TypeAlias = dict[str, Any]
+StageTable: TypeAlias = dict[StageKey, "Stage"]
 
 
 __all__ = [
@@ -40,7 +47,7 @@ __all__ = [
     "KeyedOutputMapper",
     # Input related enums, functions, constants, etc
     "INPUT_NOT_FOUND",
-    "prepare_inputs",
+    "_prepare_inputs_and_context",
     "must_bind",
     "Input",
     "InputBinding",
@@ -361,7 +368,7 @@ class KeyedOutputMapper:
 
 __all__ = [
     "INPUT_NOT_FOUND",
-    "prepare_inputs",
+    "_prepare_inputs_and_context",
 ]
 
 INPUT_NOT_FOUND = "INPUT NOT FOUND"
@@ -394,17 +401,25 @@ class Input(Generic[T, R]):
     binding : Binding[T, R]
         the binding that retrieves the input value when called.
 
+    logged : bool
+        a flag indicating whether or not the input should be injected into the logging context when the stage is run.
+
 
     Methods
     -------
     get() -> dict[str, R]
-        gets the input value from the binding and returns it as a dictionary with the key `as_arg`.
     """
 
-    as_arg: str
-    bind: "InputBinding[T, R]"
+    as_arg: str = field()
+    bind: "InputBinding[T, R]" = field()
+    logged = field(default=False)
 
     def get(self) -> dict[str, R]:
+        """
+        Returns
+        -------
+        the input value as a dictionary with the key `as_arg`
+        """
         return {self.as_arg: self.bind()}
 
 
@@ -463,6 +478,10 @@ class InputBinding(Generic[BS, BV]):
         source: ContextVar[T],
         mapper: Callable[[T], R] = must_bind,
     ) -> "InputBinding[T, R]":
+        """
+        An input binding that defers the evaluation of the input until the stage is run.
+        """
+
         return cls(source=UNBOUND, mapper=mapper, defer=source)
 
 
@@ -528,11 +547,9 @@ class KeyedInputMapper(Generic[T, R]):
                 return source.get(self.from_key, self.default)
 
 
-# no need for default input because we can use the value directly in binding.now
-# god this is SOOOO much cleaner why do i keep footgunning myself with these classes
-
-
-def prepare_inputs(inputs: StageInputs) -> dict[str, Any]:
+def _prepare_inputs_and_context(
+    inputs: StageInputs,
+) -> tuple[dict[str, Any], dict[str, Any]]:
     """
     Prepare inputs to be passed in to a stage. All inputs must be
     bound to a source before calling this method.
@@ -547,10 +564,14 @@ def prepare_inputs(inputs: StageInputs) -> dict[str, Any]:
     a dictionary of inputs
     """
     prepared_inputs = {}
+    logged_inputs = {}
     for input_mapping in inputs:
-        prepared_inputs.update(input_mapping.get())
+        inputdict, logged = input_mapping.get(), input_mapping.logged
+        prepared_inputs.update(inputdict)
+        if logged:
+            logged_inputs.update(inputdict)
 
-    return prepared_inputs
+    return prepared_inputs, logged_inputs
 
 
 @define
@@ -592,9 +613,9 @@ class Stage(Generic[P, R]):
     """
 
     function: Callable[P, R]
-    inputs: StageInputs = field(factory=StageInputs)
+    inputs: StageInputs = field(factory=list)
     has_run: bool = field(default=False)
-    outputs: StageOutputs = field(factory=StageOutputs)
+    outputs: StageOutputs = field(factory=dict)
     output_mapper: Callable[[R], StageOutputs] = field(default=DEFAULT_OUTPUT_MAPPER)
 
     def run(self, **kwargs) -> R:
@@ -615,9 +636,10 @@ class Stage(Generic[P, R]):
             be careful if this is something mutable.
 
         """
-        inputs = prepare_inputs(self.inputs, kwargs)
+        inputs, logctx = _prepare_inputs_and_context(self.inputs)
         inputs.update(kwargs)
-        output = self.function(**inputs)
+        with logging_context(**logctx):
+            output = self.function(**inputs)
         self.outputs = self.output_mapper(output)
         self.has_run = True
         return output

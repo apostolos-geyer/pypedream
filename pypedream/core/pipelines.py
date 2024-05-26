@@ -1,15 +1,18 @@
+import contextvars
 import logging
 from collections.abc import MutableMapping
 from typing import Any, Callable, Iterable, ParamSpec, TypeVar, overload
+from os import PathLike
+from pathlib import Path
+import structlog
 
-from attrs import define, field
-
+from attrs import define, field, Factory
 from pypedream.core import context
+from pypedream.core.logs import stdstructlogger, logging_context
 from pypedream.core.stages import (
     Stage,
     StageInputs,
     StageTable,
-    prepare_inputs,
 )
 
 __all__ = [
@@ -331,6 +334,75 @@ class Variables(MutableMapping[str, Any]):
 
 
 @define
+class LoggerSettings:
+    """
+    A data structure to hold settings for a logger.
+
+    Pipelines do not own their logger, instead, the logger is a `ContextVar` in the `context` module.
+
+    When Pipelines are initialized, it gets a local context that is used to run all stages. This way, stages can reference the pipeline's logger,
+    as well as other relevant variables, as well as allow for deferred evaluation of stage inputs.
+
+    Because of this approach, we cannot have a logger attribute on the pipeline. Instead, we can have a `LoggerSettings` object that is used to
+    configure the logger that is stored in the local context that all stages run under.
+
+    This allows each pipeline to function almost like its own "app" by avoiding modificaiton of global state, and allowing completely different
+    logging behaviour of the same function in two different pipelines (pretty cool if you ask me)
+
+    However, in a production environment (not that anyone would ever use my library in production), you would probably want to have a single logger
+    logging json to stdout a-la 12 factor app, so just override the logger with the `override_logger` attribute.
+
+    Attributes
+    ----------
+    name : str
+        the name of the logger (defaults to the name of the pipeline)
+
+    stream : bool | Any
+        If True, a structlog logger will be created using their rich console logger configured with what I believe are sensible defaults.
+        If False, no console logger will be added.
+        Otherwise, the value should be an io stream that can be passed into the constructor of a logging.StreamHandler
+
+    log_dir : Path | PathLike
+        The directory to write log files to. This is only used if file is True or a string. Defaults to the current working directory.
+
+    file : bool | Path | PathLike | str
+        If True, a structlog logger will be created to write json logs to a file named '{name}_{datetime.datetime.now().isoformat()}.log' in the specified log_dir.
+        If False, no file logger will be added.
+        If it is a Path or PathLike object, the logger will write json logs to the specified file, ignoring the log_dir parameter.
+        If it is a string, the logger will write json logs to a file named '{file}' in the specified log_dir.
+
+    handlers : list[logging.Handler] | None
+        A list of logging handlers to add to the logger. If None, no additional handlers will be added.
+        If not none, this will override the stream and file parameters.
+
+    override_logger : Any
+        A logger object to wrap in structlog. If this is provided we ignore everything else and just wrap it in structlog.
+
+    nowrap_overriden: bool
+        If this is true then the overridden logger MUST be a structlog logger already
+
+    structlogkwds: dict[str, Any]
+        A dictionary of keyword arguments to pass to structlog.wrap_logger when creating the logger. See the structlog documentation for more information.
+    """
+
+    # might replace stdstructlogger function with a class that can be used to create loggers
+    name: str = field()
+    stream: bool | Any = field(default=True)
+    log_dir: Path | PathLike = field(factory=Path.cwd)
+    file: bool | Path | PathLike | str = field(default=True)
+    handlers: list[logging.Handler] | None = field(default=None)
+    override_logger: Any = field(
+        default=None
+    )  # if this is provided we ignore everything except binds and just wrap this in structlog
+    nowrap_overriden: bool = field(
+        default=False
+    )  # if this is true then the overridden logger MUST be a structlog logger already
+    structlogkwds: dict[str, Any] = field(
+        factory=dict
+    )  # keyword arguments to pass to structlog.wrap_logger
+
+
+@define
 class Pipeline:
     """
     A Pipeline is a collection of stages that are run in sequence. It is the primary
@@ -349,22 +421,16 @@ class Pipeline:
 
     stages : StageTable
         a dictionary mapping stage keys to Stage objects
-
-    logger : logging.Logger
-        a logger for the pipeline
-
-    Methods
-    -------
-    stage(*args, **kwargs) -> Callable
-        see the stage method for more information, registers a stage in the pipeline
-
     """
 
     name: str = field(default="Pipeline")
     parameters: Parameters = field(factory=Parameters)
     variables: Variables = field(factory=Variables)
     stages: StageTable = field(factory=dict)
-    logger: logging.Logger = field(init=False)
+    log_settings: LoggerSettings | None = Factory(
+        lambda self: LoggerSettings(name=self.name), takes_self=True
+    )
+    ctx: contextvars.Context = field(init=False)
 
     @overload
     def stage(
@@ -440,6 +506,19 @@ class Pipeline:
 
             return func
 
+        match (stage_key is not None, name_or_callable):
+            case (_, noc) if callable(noc):
+                return decorator(name_or_callable)
+            case (False, noc) if isinstance(noc, str):
+                stage_key = noc
+                return decorator
+            case (True, noc) if isinstance(noc, str):
+                raise ValueError(
+                    "Cannot provide a name kwarg and a string as the first argument"
+                )
+            case (_, None):
+                return decorator
+
         if isinstance(name_or_callable, str):
             stage_key = name_or_callable
             return decorator
@@ -468,27 +547,10 @@ class Pipeline:
         -------
         the output of the stage
         """
-
-        ptoken = context.PIPELINE.set(self)
-        sstoken = context.STAGES.set(self.stages)
-        stoken = context.STAGE.set(self.stages[stage_key])
-        vtoken = context.VARIABLES.set(self.variables)
-        patoken = context.PARAMETERS.set(self.parameters)
-
-        stage = self.stages[stage_key]
-        inputs = prepare_inputs(stage.inputs)
-        inputs.update(kwargs)
-        output = stage.function(**inputs)
-        mapped_output = stage.output_mapper(output)
-        self.stages[stage_key].outputs = mapped_output
-        self.stages[stage_key].has_run = True
-
-        context.PIPELINE.reset(ptoken)
-        context.STAGES.reset(sstoken)
-        context.STAGE.reset(stoken)
-        context.VARIABLES.reset(vtoken)
-        context.PARAMETERS.reset(patoken)
-
+        context.STAGE.set((curr := self.stages[stage_key]))
+        with logging_context(stage=stage_key):
+            output = curr.run(**kwargs)
+        # we dont reset the context stage so if we error we can see what stage we errored in
         return output
 
     def run(self, **kwargs: Any) -> dict[str, Any]:
@@ -506,7 +568,44 @@ class Pipeline:
         -------
         a dictionary of the outputs of each stage
         """
+        self.ctx.run(self._init_run_logger)
         outputs = {}
         for stage_key in self.stages:
-            outputs[stage_key] = self.run_stage(stage_key, **kwargs)
+            outputs[stage_key] = self.ctx.run(self.run_stage, stage_key, **kwargs)
         return outputs
+
+    @ctx.default
+    def _ctx(self):
+        def _applydefaults():
+            nonlocal self
+            context.PIPELINE.set(self)
+            context.VARIABLES.set(self.variables)
+            context.PARAMETERS.set(self.parameters)
+            context.STAGES.set(self.stages)
+
+        ctx = contextvars.copy_context()
+        ctx.run(_applydefaults)
+        return ctx
+
+    def _init_run_logger(self):
+        if self.log_settings is None:
+            return
+        ls = self.log_settings
+        match (ls.override_logger, ls.nowrap_overriden):
+            case (None, _):
+                context.LOG.set(
+                    stdstructlogger(
+                        ls.name.replace(" ", "_"),
+                        stream=ls.stream,
+                        log_dir=ls.log_dir,
+                        file=ls.file,
+                        handlers=ls.handlers,
+                    )
+                )
+
+            case (override, nowrap):
+                context.LOG.set(
+                    override
+                    if nowrap
+                    else structlog.wrap_logger(override, **ls.structlogkwds)
+                )
