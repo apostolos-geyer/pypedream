@@ -403,15 +403,11 @@ class Input(Generic[T, R]):
     logged : bool
         a flag indicating whether or not the input should be injected into the logging context when the stage is run.
 
-
-    Methods
-    -------
-    get() -> dict[str, R]
     """
 
     as_arg: str = field()
     bind: "InputBinding[T, R]" = field()
-    logged = field(default=False)
+    logged: bool = field(default=False)
 
     def get(self) -> dict[str, R]:
         """
