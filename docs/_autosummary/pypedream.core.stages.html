@@ -39,6 +39,7 @@
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/pypedream.core.stages';</script>
+    <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="pypedream.exceptions" href="pypedream.exceptions.html" />
@@ -135,6 +136,13 @@
 <nav class="navbar-nav">
   <ul class="bd-navbar-elements navbar-nav">
     
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../about.html">
+                        About pypedream
+                      </a>
+                    </li>
+                
+
                     <li class="nav-item current active">
                       <a class="nav-link nav-internal" href="../api.html">
                         API
@@ -229,6 +237,13 @@
 <nav class="navbar-nav">
   <ul class="bd-navbar-elements navbar-nav">
     
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../about.html">
+                        About pypedream
+                      </a>
+                    </li>
+                
+
                     <li class="nav-item current active">
                       <a class="nav-link nav-internal" href="../api.html">
                         API
@@ -275,6 +290,7 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="pypedream.html">pypedream</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="pypedream.core.html">pypedream.core</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="pypedream.core.context.html">pypedream.core.context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pypedream.core.logs.html">pypedream.core.logs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pypedream.core.pipelines.html">pypedream.core.pipelines</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">pypedream.core.stages</a></li>
 </ul>
@@ -285,6 +301,7 @@
 <li class="toctree-l1"><a class="reference internal" href="pypedream.exceptions.html">pypedream.exceptions</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="pypedream.core.html">pypedream.core</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="pypedream.core.context.html">pypedream.core.context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypedream.core.logs.html">pypedream.core.logs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pypedream.core.pipelines.html">pypedream.core.pipelines</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">pypedream.core.stages</a></li>
 </ul>
@@ -367,9 +384,6 @@
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">must_bind</span></code>(x)</p></td>
 <td><p>A function that raises an UnboundInputException if the input is unbound.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#pypedream.core.stages.prepare_inputs" title="pypedream.core.stages.prepare_inputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">prepare_inputs</span></code></a>(inputs)</p></td>
-<td><p>Prepare inputs to be passed in to a stage.</p></td>
-</tr>
 </tbody>
 </table>
 <p class="rubric">Classes</p>
@@ -378,7 +392,7 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="pypedream.html#pypedream.DependencyInputMapper" title="pypedream.core.stages.DependencyInputMapper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DependencyInputMapper</span></code></a>(from_stage[, ...])</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="pypedream.html#pypedream.Input" title="pypedream.core.stages.Input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Input</span></code></a>(as_arg, bind)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="pypedream.html#pypedream.Input" title="pypedream.core.stages.Input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Input</span></code></a>(as_arg, bind[, logged])</p></td>
 <td><p>The Input class is a generic class that represents an input to a stage.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="pypedream.html#pypedream.InputBinding" title="pypedream.core.stages.InputBinding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InputBinding</span></code></a>(source, mapper, ...)</p></td>
@@ -412,21 +426,6 @@
 </tr>
 </tbody>
 </table>
-<dl class="py function">
-<dt class="sig sig-object py" id="pypedream.core.stages.prepare_inputs">
-<span class="sig-prename descclassname"><span class="pre">pypedream.core.stages.</span></span><span class="sig-name descname"><span class="pre">prepare_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="pypedream.html#pypedream.Input" title="pypedream.core.stages.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pypedream.core.stages.prepare_inputs" title="Link to this definition">#</a></dt>
-<dd><p>Prepare inputs to be passed in to a stage. All inputs must be
-bound to a source before calling this method.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>inputs</strong> (<em>list</em><em>[</em><em>StageInputMapping</em><em>]</em>) – the list of input mappings to prepare</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>a dictionary of inputs</p>
-</dd>
-</dl>
-</dd></dl>
-
 </section>
 
 
@@ -466,18 +465,6 @@ bound to a source before calling this method.</p>
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
-
-  <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
-  </div>
-  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pypedream.core.stages.prepare_inputs"><code class="docutils literal notranslate"><span class="pre">prepare_inputs()</span></code></a></li>
-</ul>
-  </nav></div>
 
   <div class="sidebar-secondary-item">
 

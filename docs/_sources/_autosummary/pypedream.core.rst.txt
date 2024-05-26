@@ -1,4 +1,4 @@
-pypedream.core
+﻿pypedream.core
 ==============
 
 .. automodule:: pypedream.core
@@ -28,6 +28,7 @@ pypedream.core
    :recursive:
 
    pypedream.core.context
+   pypedream.core.logs
    pypedream.core.pipelines
    pypedream.core.stages
 

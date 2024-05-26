@@ -39,9 +39,10 @@
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/pypedream.core.context';</script>
+    <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="pypedream.core.pipelines" href="pypedream.core.pipelines.html" />
+    <link rel="next" title="pypedream.core.logs" href="pypedream.core.logs.html" />
     <link rel="prev" title="pypedream.core" href="pypedream.core.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -135,6 +136,13 @@
 <nav class="navbar-nav">
   <ul class="bd-navbar-elements navbar-nav">
     
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../about.html">
+                        About pypedream
+                      </a>
+                    </li>
+                
+
                     <li class="nav-item current active">
                       <a class="nav-link nav-internal" href="../api.html">
                         API
@@ -229,6 +237,13 @@
 <nav class="navbar-nav">
   <ul class="bd-navbar-elements navbar-nav">
     
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../about.html">
+                        About pypedream
+                      </a>
+                    </li>
+                
+
                     <li class="nav-item current active">
                       <a class="nav-link nav-internal" href="../api.html">
                         API
@@ -275,6 +290,7 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="pypedream.html">pypedream</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="pypedream.core.html">pypedream.core</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">pypedream.core.context</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pypedream.core.logs.html">pypedream.core.logs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pypedream.core.pipelines.html">pypedream.core.pipelines</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pypedream.core.stages.html">pypedream.core.stages</a></li>
 </ul>
@@ -285,6 +301,7 @@
 <li class="toctree-l1"><a class="reference internal" href="pypedream.exceptions.html">pypedream.exceptions</a></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="pypedream.core.html">pypedream.core</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">pypedream.core.context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypedream.core.logs.html">pypedream.core.logs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pypedream.core.pipelines.html">pypedream.core.pipelines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pypedream.core.stages.html">pypedream.core.stages</a></li>
 </ul>
@@ -358,6 +375,13 @@
                   
   <section id="module-pypedream.core.context">
 <span id="pypedream-core-context"></span><h1>pypedream.core.context<a class="headerlink" href="#module-pypedream.core.context" title="Link to this heading">#</a></h1>
+<p>pypedream.core.context contains context variables used to store the current pipeline.</p>
+<p>When a stage is run by a pipeline, the pipeline runs it in a context that contains all the information needed to run
+the stage and bind its inputs and outputs.</p>
+<p>These context variables can also be used within the body of stage functions to access information about the current
+pipeline, and modify them. However, this may be dangerous. It is recommended only to modify the <cite>VARIABLES</cite> at
+most. Good use of the context variables is in deferred input bindings (bindings of inputs for stages that are
+evaluated at stage execution time rather than pipeline construction time)</p>
 <p class="rubric">Functions</p>
 <table class="autosummary longtable table autosummary">
 <tbody>
@@ -393,11 +417,11 @@
       </div>
     </a>
     <a class="right-next"
-       href="pypedream.core.pipelines.html"
+       href="pypedream.core.logs.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">pypedream.core.pipelines</p>
+        <p class="prev-next-title">pypedream.core.logs</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
