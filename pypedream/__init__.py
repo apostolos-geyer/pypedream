@@ -8,7 +8,7 @@ rule #3 is dont ask me where the unit tests are, there are none.
 """
 from . import core as core
 from . import exceptions
-from .core import context
+from . import ctx
 from .core.pipelines import Parameters, Pipeline, Variables
 from .core.stages import (
     Stage,
@@ -25,7 +25,6 @@ from .core.stages import (
 )
 
 __all__ = [
-    "core",
     "Stage",
     "StageInputs",
     "StageKey",
@@ -41,5 +40,6 @@ __all__ = [
     "Variables",
     "Parameters",
     "exceptions",
-    "context",
+    "ctx",
+    "core",
 ]

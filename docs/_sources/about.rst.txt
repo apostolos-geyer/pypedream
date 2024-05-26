@@ -39,84 +39,100 @@ Suppose you have the following functions:
 
 .. code-block:: python
 
-   # mymodule.py
-   from datetime import date
-   from typing import Any
+    from datetime import date
+    from typing import Any
 
-   def get_data(source: Any, for_day: date) -> Any:
-       return f"{source} for day {for_day}"
+    from pypedream.logging import info
 
-   def combine_data(data1: Any, data2: Any) -> Any:
-       return f"{data1} and {data2}"
+    def get_data(source: Any, for_day: date) -> Any:
+        info(f"Getting data from {source} for day {for_day}")
+        return f"{source} for day {for_day}"
 
-   def validate_data(new_data: Any, sources: list[Any]) -> bool:
-       return all(source in new_data for source in sources)
+
+    def combine_data(data1: str, data2: str) -> str:
+        info(f"Combining data {data1} and {data2}")
+        return f"{data1} and {data2}"
+
+
+    def validate_data(new_data: str, sources: list[str]) -> bool:
+        info("Validating data against sources", data=new_data, sources=sources)
+        return all(source in new_data for source in sources)
 
 You can chain them together like this:
 
 .. code-block:: python
 
-   import pypedream
-   from pypedream import (
-       Pipeline,
-       Parameters,
-       Stage,
-       Input,
-       InputBinding,
-       KeyedInputMapper,
-       DependencyInputMapper,
-       context
-   )
+    from pathlib import Path
+    import pypedream
+    from pypedream import (
+        Pipeline,
+        Parameters,
+        Stage,
+        Input,
+        InputBinding,
+        KeyedInputMapper,
+        ctx,
+    )
 
-   pipeline = pypedream.Pipeline(
-       "my pipeline",
-       Parameters.define(
-           source1='your_mom',
-           source2='your_girlfriend'
-       ),
-       stages={
-           "get_data1": Stage(
-               get_data,
-               inputs=[
-                   Input(as_arg="source", bind=InputBinding.deferred(context.PARAMETERS, mapper=KeyedInputMapper(from_key="source2"))),
-                   Input(as_arg="for_day", bind=InputBinding.now(date.today())),
-               ]
-           ),
-           "get_data2": Stage(
-               get_data,
-               inputs=[
-                   Input(as_arg="source", bind=InputBinding.deferred(context.PARAMETERS, mapper=KeyedInputMapper(from_key="source1"))),
-                   Input(as_arg="for_day", bind=InputBinding.now(date.today())),
-               ]
-           ),
-           "combine_data": Stage(
-               combine_data,
-               inputs=[
-                   Input(as_arg="data1", bind=InputBinding.deferred(context.STAGES, mapper=DependencyInputMapper(from_stage="get_data1"))),
-                   Input(as_arg="data2", bind=InputBinding.deferred(context.STAGES, mapper=DependencyInputMapper(from_stage="get_data2"))),
-               ]
-           ),
-           "validate_data": Stage(
-               validate_data,
-               inputs=[
-                   Input(as_arg="new_data", bind=InputBinding.deferred(context.STAGES, mapper=DependencyInputMapper(from_stage="combine_data"))),
-                   Input(as_arg="sources", bind=InputBinding.deferred(context.PARAMETERS, mapper=lambda params: [params["source1"], params["source2"]]))
-               ]
-           )
-       }
-   )
+    from pypedream.input import dependency, known, param
 
-Cool? Cool. Until I reinvent the interface and forget to update the README.
+    log_dir = Path.cwd() / "logs"
+    log_dir.mkdir(exist_ok=True)
+    pipeline = Pipeline(
+        "ok enough",
+        Parameters.define(source1="your_mom", source2="your_girlfriend"),
+        stages={
+            **{
+                f"get_data{i}": Stage(
+                    get_data,
+                    inputs=[
+                        param(f"source{i}", as_arg="source"),
+                        known(date.today(), as_arg="for_day"),
+                    ],
+                )
+                for i in (1, 2)
+            },
+            "combine_data": Stage(
+                combine_data,
+                inputs=[dependency(f"get_data{i}", as_arg=f"data{i}") for i in (1, 2)],
+            ),
+            "validate_data": Stage(
+                validate_data,
+                inputs=[
+                    dependency("combine_data", as_arg="new_data"),
+                    Input(
+                        as_arg="sources",
+                        bind=InputBinding.deferred(
+                            ctx.PARAMETERS,
+                            mapper=lambda params: [params["source1"], params["source2"]],
+                        ),
+                        logged=True,
+                    ),
+                ],
+            ),
+        },
+        log_settings=LoggerSettings(
+            "ok_enough",
+            log_dir=ldir,
+        )
+    )
+
+Just like that, you have structured json logging to a file, pretty printing logs to the console, access
+to pipeline local state with contextvars that are enclosed within the pipeline, packaged in a highly
+expressive (and improving) interface.
+
+That is, until I decide all of this is wrong and change everything.
 
 Roadmap
 =======
 
 - ✅ Function wrapper that can inject inputs from other function wrappers and map outputs (Stage object)
 - ✅ Pipeline object to use the function wrappers and provide variables to them (Pipeline object, which might be removed)
-- 🔲 Logging configuration
+- ✅ Logging configuration
 - ✅ Specify a dependency on shared state that only exists within the context of a pipeline run (using contextvars)
-- 🔲 Custom output stream object that replaces stdout at pipeline runtime so prints from stage functions get redirected into logging
+- ❌ (cancelled cause this is stupid) Custom output stream object that replaces stdout at pipeline runtime so prints from stage functions get redirected into logging
 - ✅ Working linear pipeline
+- ✅ more concise abstractions over inputs and inputbindings (pypedream.inputs module)
 - 🔲 Explicitly define dependencies between stages and order of execution
 - 🔲 Better ways to chain stages (currently only linear); support for higher-order patterns and concurrency patterns like map, reduce, broadcast, etc.
 - 🔲 Jupyter notebook UI

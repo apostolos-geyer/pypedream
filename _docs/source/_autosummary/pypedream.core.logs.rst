@@ -1,4 +1,4 @@
-﻿pypedream.core.logs
+pypedream.core.logs
 ===================
 
 .. automodule:: pypedream.core.logs

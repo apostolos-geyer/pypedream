@@ -21,14 +21,3 @@
 
 
 
-.. rubric:: Modules
-
-.. autosummary::
-   :toctree:
-   :recursive:
-
-   pypedream.core.context
-   pypedream.core.logs
-   pypedream.core.pipelines
-   pypedream.core.stages
-

@@ -31,8 +31,9 @@ class ExitPipeline(Exception):
     Exception to exit the pipeline
     """
 
-    def __init__(self, message: str, error: False, *args):
+    def __init__(self, message: str, *args, error: bool = False):
         self.message = message
+        self.error = error
         super().__init__(*args)
 
 
@@ -549,7 +550,13 @@ class Pipeline:
         """
         context.STAGE.set((curr := self.stages[stage_key]))
         with logging_context(stage=stage_key):
-            output = curr.run(**kwargs)
+            try:
+                output = curr.run(**kwargs)
+            except ExitPipeline:
+                raise
+            except Exception as e:
+                context.LOG.get().exception(e)
+                raise ExitPipeline("Error in pipeline", True, e) from e
         # we dont reset the context stage so if we error we can see what stage we errored in
         return output
 
@@ -571,7 +578,17 @@ class Pipeline:
         self.ctx.run(self._init_run_logger)
         outputs = {}
         for stage_key in self.stages:
-            outputs[stage_key] = self.ctx.run(self.run_stage, stage_key, **kwargs)
+            try:
+                outputs[stage_key] = self.ctx.run(self.run_stage, stage_key, **kwargs)
+            except ExitPipeline as e:
+                log = self.ctx[context.LOG]
+                if e.error:
+                    log.exception(
+                        "Exited pipeline with error state.",
+                        exc_info=True,
+                    )
+                else:
+                    log.info("Exited pipeline successfully.")
         return outputs
 
     @ctx.default
