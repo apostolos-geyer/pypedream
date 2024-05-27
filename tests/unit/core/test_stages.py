@@ -19,9 +19,23 @@ from pypedream.core.stages import (
     CHILL,
     PRESERVE,
     WARN_UNEXPECTED,
+    _prepare_inputs_and_context,
+    Input,
 )
 
 # Assuming the SequentialOutputMapper and OutputMapperBehaviour have been correctly imported and set up
+
+
+def test_inputs_and_preparation():
+    input1 = Input(as_arg="x", bind=InputBinding.immediate(10))
+    input2 = Input(as_arg="y", bind=InputBinding.immediate(20), logged=True)
+    input3 = Input(as_arg="z", bind=InputBinding.immediate(30), logged=True)
+
+    inputs = [input1, input2, input3]
+
+    all_inputs, logged_inputs = _prepare_inputs_and_context(inputs)
+    assert all_inputs == {"x": 10, "y": 20, "z": 30}
+    assert logged_inputs == {"y": 20, "z": 30}
 
 
 def test_sequential_output_mapper_strict():
@@ -170,6 +184,10 @@ def test_sequential_output_mapper(emotional_stage):
         "bad": b,
         "ohio": c,
     }
+
+    emotional_stage.reset()
+    assert not emotional_stage.has_run
+    assert emotional_stage.outputs == {}
 
 
 @pytest.mark.parametrize(

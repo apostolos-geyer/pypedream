@@ -1,4 +1,4 @@
-pypedream.core.pipelines
+﻿pypedream.core.pipelines
 ========================
 
 .. automodule:: pypedream.core.pipelines

@@ -1,7 +1,7 @@
 import contextvars
 import logging
 from collections.abc import MutableMapping
-from typing import Any, Callable, Iterable, ParamSpec, TypeVar, overload
+from typing import Any, Callable, Iterable, ParamSpec, TypeVar
 from os import PathLike
 from pathlib import Path
 import structlog
@@ -432,25 +432,6 @@ class Pipeline:
         lambda self: LoggerSettings(name=self.name), takes_self=True
     )
     ctx: contextvars.Context = field(init=False)
-
-    @overload
-    def stage(
-        self,
-        func: Callable[P, R],
-    ) -> Callable[P, R]:
-        """
-        Registers a stage in the pipeline under the name of the function
-
-        Parameters
-        ----------
-        func : Callable
-            the function to register as a stage
-
-        Returns
-        -------
-        the function
-        """
-        ...
 
     def stage(
         self,
