@@ -3,16 +3,16 @@ pypedream.ctx
 
 .. automodule:: pypedream.ctx
 
-   
-   
-   
 
-   
-   
+
+
+
+
+
    .. rubric:: Functions
 
    .. autosummary::
-   
+
       logger
       parameters
       pipeline
@@ -20,22 +20,13 @@ pypedream.ctx
       stage
       stages
       variables
-   
-   
 
-   
-   
+
+
+
+
    .. rubric:: Classes
 
    .. autosummary::
-   
+
       PipelineContext
-   
-   
-
-   
-   
-   
-
-
-

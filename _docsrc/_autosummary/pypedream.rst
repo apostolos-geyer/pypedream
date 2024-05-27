@@ -1,0 +1,4 @@
+﻿pypedream
+=========
+
+.. automodule:: pypedream

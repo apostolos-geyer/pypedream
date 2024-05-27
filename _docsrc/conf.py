@@ -44,9 +44,4 @@ exclude_patterns = []
 html_theme = "furo"
 html_logo = "_static/pypedream.webp"
 
-html_theme_options = {
-    "search_bar_text": "me when i search",
-    "navbar_end": ["search-field.html", "navbar-icon-links.html"],
-}
-
 html_static_path = ["_static"]
