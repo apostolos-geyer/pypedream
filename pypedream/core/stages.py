@@ -1,4 +1,5 @@
 from contextvars import ContextVar
+from warnings import warn
 from enum import Flag, auto
 from functools import cached_property
 from textwrap import dedent
@@ -124,7 +125,7 @@ def DEFAULT_OUTPUT_MAPPER(output: Any) -> StageOutputs:
 @frozen
 class SequentialOutputMapper:
     """
-    An implementation of the StageOutputMapper protocol that maps an indexable sequence of values to a dictionary of outputs.
+    A callable used with stage that maps an indexable sequence of values to a dictionary of outputs.
 
     Attributes
     ----------
@@ -190,9 +191,10 @@ class SequentialOutputMapper:
                 )
                 if OutputMapperBehaviour.WARN_UNEXPECTED in etc:
                     # TODO: log a warning, with more info
-                    print(
-                        "Some outputs were not mapped. TODO: MAKE THIS LOG A WARNING AND BE MORE INFORMATIVE"
+                    warn(
+                        f"Length of outputs received did not match expected. want: {keylen}, have: {seqlen}"
                     )
+
                 return mapping
 
             case [OutputMapperBehaviour.PRESERVE, *etc]:
@@ -207,8 +209,8 @@ class SequentialOutputMapper:
 
                 if OutputMapperBehaviour.WARN_UNEXPECTED in etc:
                     # TODO: log a warning, with more info
-                    print(
-                        "Some outputs were not mapped. TODO: MAKE THIS LOG A WARNING AND BE MORE INFORMATIVE"
+                    warn(
+                        f"Length of outputs received did not match expected. want: {keylen}, have: {seqlen}"
                     )
                 return mapping
 
@@ -256,7 +258,7 @@ class SequentialOutputMapper:
 @frozen
 class KeyedOutputMapper:
     """
-    An implementation of the StageOutputMapper protocol that maps a dictionary of values to a dictionary of outputs.
+    A callable used with stage that maps dictionary return values to a dictionary of outputs.
 
     Attributes
     ----------
@@ -307,8 +309,8 @@ class KeyedOutputMapper:
             case [OutputMapperBehaviour.CHILL, *etc]:
                 mapping = {self.keys[k]: x[k] for k in self.keys if k in x}
                 if WARN_UNEXPECTED in etc:
-                    print(
-                        "Some outputs were not mapped. TODO: MAKE THIS LOG A WARNING AND BE MORE INFORMATIVE"
+                    warn(
+                        f"Keys of outputs received did not match expected. want: {set(self.keys.keys())}, have: {set(x.keys())}"
                     )
                 return mapping
 
@@ -317,8 +319,8 @@ class KeyedOutputMapper:
                 extra = {k: v for k, v in x.items() if k not in self.keys}
                 mapping.update(extra)
                 if WARN_UNEXPECTED in etc:
-                    print(
-                        "Some outputs were not mapped. TODO: MAKE THIS LOG A WARNING AND BE MORE INFORMATIVE"
+                    warn(
+                        f"Keys of outputs received did not match expected. want: {set(self.keys.keys())}, have: {set(x.keys())}"
                     )
                 return mapping
 
@@ -365,18 +367,7 @@ class KeyedOutputMapper:
         return string
 
 
-__all__ = [
-    "INPUT_NOT_FOUND",
-    "_prepare_inputs_and_context",
-]
-
 INPUT_NOT_FOUND = "INPUT NOT FOUND"
-
-
-BS = TypeVar("BS")
-BV = TypeVar("BV")
-T = TypeVar("T")
-R = TypeVar("R")
 
 
 UNBOUND = "UNBOUND"
@@ -397,7 +388,7 @@ class Input(Generic[T, R]):
         the argument to pass the input as. This should match the name of the argument in the function signature of
         the stage that the input is being passed to.
 
-    binding : Binding[T, R]
+    bind : InputBinding[T, R]
         the binding that retrieves the input value when called.
 
     logged : bool
@@ -418,14 +409,6 @@ class Input(Generic[T, R]):
         return {self.as_arg: self.bind()}
 
 
-class UnboundInputException(Exception):
-    pass
-
-
-class UndefinedInputException(Exception):
-    pass
-
-
 # ------------------------------
 # INPUT BINDING TYPE
 # ------------------------------
@@ -434,30 +417,240 @@ class UndefinedInputException(Exception):
 # and more flexible... dependency inversion
 
 
-def must_bind(x: T) -> T:
+def must_bind(x: T | UNBOUND_T) -> T:
     """
-    A function that raises an UnboundInputException if the input is unbound. Used as a default mapper for bindings.
+    A function that raises a ValueError if the input is unbound. Used as a default mapper for bindings.
     """
     if x == UNBOUND:
-        raise UnboundInputException
+        raise ValueError("Unbound input")
     return x
 
 
-@define
-class InputBinding(Generic[BS, BV]):
-    source: BS | UNBOUND_T = field(default=UNBOUND)
-    mapper: Callable[[BS], BV] | Callable[[BS | UNBOUND_T], BV] = field(
-        default=must_bind
-    )
-    defer: ContextVar[BS] | None = field(default=None)
+BindingMapperType = (
+    Callable[[T], R]
+    | Callable[[T | UNBOUND_T], R]
+    | Callable[[ContextVar[T]], R]
+    | Callable[[Callable[..., T]], R]
+)
 
-    def __call__(self) -> BV:
+
+def _unwrap_ctxvar_then_apply(
+    mapper: Callable[[T | UNBOUND_T], R] | Callable[[T], R],
+) -> Callable[[ContextVar[T]], R]:
+    def wrapper(var: ContextVar[T]) -> R:
+        return mapper(var.get())
+
+    return wrapper
+
+
+def _call_first_then_apply(
+    mapper: Callable[[T | UNBOUND_T], R] | Callable[[T], R],
+    *args: P.args,
+    **kwargs: P.kwargs,
+) -> Callable[[Callable[P, T]], R]:
+    """
+    returns a closure that accepts a function `fun` and applies `mapper` to `fun(*args, **kwargs)`
+
+    Parameters
+    ----------
+    *args: P.args
+        positional arguments to pass to the function passed to the closure
+
+    **kwargs: P.kwargs
+        keyword arguments to pass to the function passed to the closure
+
+    Returns
+    -------
+    Callable[[Callable[P, T]], R]
+        function that takes in another function with signature f: **P -> T, and applies a mapper g:T->R
+    """
+
+    def wrapper(fun: Callable[P, T]) -> R:
+        return mapper(fun(*args, **kwargs))
+
+    return wrapper
+
+
+@define
+class InputBinding(Generic[T, R]):
+    """
+    An `InputBinding[T, R]` is used as part of an `Input` to a `Stage`.
+
+    i.e, suppose `Stage` has an argument of type `R`. To define an input to it we would
+    use a binding to a source of type `T` with a mapper `f:T->R` that retrieves the
+    value for the argument at the time of execution.
+
+    It can either be a binding to a value known at the time of instantiation (of the binding)
+    in which case you would use `InputBinding.immediate`, or a value to be retrieved
+    from a context variable at execution time (of the `Stage` taking the `Input` that owns
+    the `InputBinding`) in which case you'd use `InputBinding.contextual`, or to a function to
+    be called at evaluation time via `InputBinding.callback`
+
+    See the docs of the aformentioned methods for more information.
+
+    Attributes
+    ----------
+    source : T | UNBOUND_T, optional
+        The `source` of the input, this may be the value itself (i.e T == R) or a value
+        from which the input can be retrieved. How it is retrieved from the source is handled
+        by the `mapper`. An uninitialized InputBinding or one that is evaluated at execution
+        time via a `ContextVar` will have `source == UNBOUND`.
+
+    mapper : BindingMapperType, optional
+        The function called when the `InputBinding` is evaluated. The `mapper` is responsible
+        for behaviours like default values, error handling, etc.
+
+    defer : ContextVar[T] | Callable[..., T] | None, optional
+        The `ContextVar` to defer to, if any. If
+    """
+
+    source: T | UNBOUND_T = field(default=UNBOUND)
+    mapper: BindingMapperType[T, R] = field(default=must_bind)
+    defer: ContextVar[T] | Callable[..., T] | None = field(default=None)
+
+    def __call__(self: "InputBinding[T, R]") -> R:
+        """
+        Get the value of the input.
+
+        Behaviour is as follows:
+        let S = `self.source` is not `UNBOUND`, D = `self.defer` is not `None`
+
+        S or not D -> apply `self.mapper` to `self.source`
+        - a defined source takes precedence even if defer is defined
+        - mapper is expected to handle the possibility of source being undefined
+
+        not S and D -> apply `self.mapper` to `self.defer`
+        - if the `InputBinding` instance was defined with `InputBinding.deferred(..., get_first=True)` then
+            `self.defer.get()` will be called first and passed into `self.mapper` and a possible `LookupError`
+            will not be handled.
+        - Otherwise the `mapper` must manually unwrap the `ContextVar`
+
+        Returns
+        -------
+        R
+        The result of `self.mapper(self.source)` or `self.mapper(self.defer)` as defined above
+        """
         # we never force an unbound input to raise an exception, the mapper decides what to do
-        match (self.source, self.defer):
-            case ("UNBOUND", _):
-                return self.mapper(self.defer.get())
-            case (_, _):
-                return self.mapper(self.source)
+        # however it is the default behaviour.
+        try:
+            match (self.source is not UNBOUND, self.defer is not None):
+                case (True, _) | (_, False):
+                    return self.mapper(self.source)
+                case _:
+                    return self.mapper(self.defer)
+        except Exception as e:
+            raise UnboundInputException(self) from e
+
+    @classmethod
+    def immediate(
+        cls,
+        source: T,
+        mapper: Callable[[T], R] = must_bind,
+    ) -> "InputBinding[T, R]":
+        """
+        Bind to a known value that can be directly passed in to the input or mapped from
+
+        Parameters
+        ----------
+        source : T
+            The source of the input
+
+        mapper : Callable[[T], R]
+            A callable to apply to `source` to get the input value. `must_bind` by default, which will
+            just return `source` given it is not `UNBOUND`.
+
+        Returns
+        -------
+        InputBinding[T, R]
+        """
+        return cls(source=source, mapper=mapper)
+
+    @classmethod
+    def contextual(
+        cls,
+        source: ContextVar[T],
+        mapper: BindingMapperType[T, R] = must_bind,
+        get_first: bool = True,
+    ) -> "InputBinding[T, R]":
+        """
+        An input binding that defers the evaluation of the input until the stage is run
+        via a ContextVar
+
+        Parameters
+        ----------
+        source : ContextVar[T]
+            A `ContextVar` referencing the source of the value, to be retrieved from in the
+            execution context of the stage
+
+        mapper : BindingMapperType[T, R], optional
+            A function that expects either a `T`, the unit type `UNBOUND_T` (value `UNBOUND`), or
+            a `ContextVar[T]`. The correct signature depends on the next argument `get_first`.
+            Defaults to `must_bind`
+
+        get_first : bool, optional
+            Whether or not to call `.get()` on the `ContextVar` being deferred to before passing it
+            into the `mapper`. Defaults to `True` so it can be passed into `must_bind` which will
+            just return the value. However, this means that if the `.get()` raises `LookupError` it
+            will not be handled.
+            To handle the case where `.get()` fails, pass `get_first = False` and a custom `mapper`.
+
+        Returns
+        -------
+        InputBinding[T, R]
+        """
+
+        return cls(
+            mapper=mapper if not get_first else _unwrap_ctxvar_then_apply(mapper),
+            defer=source,
+        )
+
+    @classmethod
+    def callback(
+        cls,
+        fun: Callable[P, T],
+        *cbargs: P.args,
+        mapper: BindingMapperType[T, R] = must_bind,
+        call_first: bool = True,
+        **cbkwargs: P.kwargs,
+    ) -> "InputBinding[T, R]":
+        """
+        An InputBinding that defers the evaluation of the input until the stage is run via
+        a closure.
+
+        Parameters
+        ----------
+        fun : Callable[P, T]
+            A function taking paramaters P returning a value of type T to be called at
+            evaluation of the input
+
+        *cbargs : P.args
+            Positional arguments matching the signature of `fun`. Passed to `fun` at evaluation time.
+
+        mapper : BindingMapperType[T, R], optional
+            Function that will take the output of `fun` and map it to the expected type of the input,
+            default `must_bind` as usual
+
+        call_first : bool, optional
+            whether or not `fun` should be called and have the result passed into `mapper`
+            or just be directly passed in to `mapper`. if `False` then `*cbargs` and `**cbkwargs` are
+            meaningless as the class has no power to enforce how the function is called, and
+            you should be using a custom mapper... If you're actually meaning to use a function
+            as an argument to a stage then bind with `InputBinding.immediate`
+
+        **cbkwargs : P.kwargs
+            Keyword arguments matching the signature of `fun`. Passed to `fun` at evaluation time.
+
+        Returns
+        -------
+        InputBinding[T, R]
+        """
+
+        return cls(
+            mapper=mapper
+            if not call_first
+            else _call_first_then_apply(mapper, *cbargs, **cbkwargs),
+            defer=fun,
+        )
 
     @classmethod
     def now(
@@ -465,19 +658,48 @@ class InputBinding(Generic[BS, BV]):
         source: T,
         mapper: Callable[[T], R] = must_bind,
     ) -> "InputBinding[T, R]":
-        return cls(source=source, mapper=mapper)
+        """
+        replaced by `immediate`
+        """
+        return cls.immediate(source, mapper)
 
     @classmethod
     def deferred(
         cls,
         source: ContextVar[T],
-        mapper: Callable[[T], R] = must_bind,
+        mapper: BindingMapperType[T, R] = must_bind,
+        get_first: bool = True,
     ) -> "InputBinding[T, R]":
         """
-        An input binding that defers the evaluation of the input until the stage is run.
+        replaced by `contextual`
         """
+        return cls.contextual(source, mapper, get_first)
 
-        return cls(source=UNBOUND, mapper=mapper, defer=source)
+
+class UnboundInputException(Exception):
+    """
+    Exception raised from InputBinding if an exception is raised in the mapper.
+    """
+
+    _TMPLT_MSG = "Failure to bind InputBinding with source={source}, mapper={mapper}, defer={defer}"
+
+    def __init__(self, binding: "InputBinding", *args):
+        self.binding = binding
+        super().__init__(*args)
+
+    def __str__(self) -> str:
+        source, mapper, defer = (
+            self.binding.source,
+            self.binding.mapper,
+            self.binding.defer,
+        )
+        return self._TMPLT_MSG.format(source=source, mapper=mapper, defer=defer)
+
+
+class UndefinedInputException(Exception):
+    """
+    Utility exception for library defined mappers when an input cannot be retrieved.
+    """
 
 
 # ------------------------------
@@ -497,7 +719,11 @@ class DependencyInputMapper(Generic[T, R]):
 
     def __call__(self, source: StageTable | UNBOUND_T) -> T:
         if (source is UNBOUND) and self.required:
-            raise UnboundInputException
+            raise UndefinedInputException(
+                "Source stage table is undefined... how could I get a stage output?"
+            )
+        elif source is UNBOUND:
+            return self.default
         elif ((stage := source.get(self.from_stage, None)) is None) and self.required:
             raise UndefinedInputException(
                 f"Stage {self.from_stage} not found in source, hence output {self.from_output} not found."
@@ -529,7 +755,9 @@ class KeyedInputMapper(Generic[T, R]):
     def __call__(self, source: Mapping[str, Any] | UNBOUND_T) -> T:
         match (source is UNBOUND, self.required):
             case (True, True):
-                raise UnboundInputException
+                raise UndefinedInputException(
+                    "Source mapping is undefined... how could I get a keyed input?"
+                )
             case (True, False):
                 return self.default
             case (False, True):
@@ -595,16 +823,6 @@ class Stage(Generic[P, R]):
         a function that maps the return value of the stage to a dictionary
         of outputs. By default, this function returns a dictionary with a
         single key "return" that maps to the return value of the stage.
-
-
-    Methods
-    -------
-    run(**kwargs) -> R
-        runs the stage with the given keyword arguments, which will override any inputs.
-        Returns the return value of the function.
-
-    reset()
-        resets all internal state (sets has_run to False and clears outputs)
     """
 
     function: Callable[P, R]
