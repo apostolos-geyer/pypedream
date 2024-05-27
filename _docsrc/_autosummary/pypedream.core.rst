@@ -2,22 +2,3 @@
 ==============
 
 .. automodule:: pypedream.core
-
-   
-   
-   
-
-   
-   
-   
-
-   
-   
-   
-
-   
-   
-   
-
-
-

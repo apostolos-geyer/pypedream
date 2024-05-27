@@ -26,8 +26,12 @@ Read the about page for more information.
    about
    api
 
-.. autosummary::
-   :toctree:
+Also. I am proud to announce that after 4-5 years of developing in Python, I have finally done the impossible... Wrote unit tests.
+I am so proud that I am going to make my coverage reports in available in my documentation. 
+
+.. raw:: html
+
+   <a href="_static/coverage/index.html">View Coverage Report</a>
 
 
 Indices and tables

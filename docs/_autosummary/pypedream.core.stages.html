@@ -191,7 +191,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -268,7 +268,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -280,10 +280,10 @@
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">DEFAULT_OUTPUT_MAPPER</span></code>(output)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pypedream.core.stages.DEFAULT_OUTPUT_MAPPER" title="pypedream.core.stages.DEFAULT_OUTPUT_MAPPER"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DEFAULT_OUTPUT_MAPPER</span></code></a>(output)</p></td>
 <td><p>Default output mapper that maps the return value of a stage to a dictionary with a single key <cite>DEFAULT_OUTPUT_KEY</cite></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">must_bind</span></code>(x)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#pypedream.core.stages.must_bind" title="pypedream.core.stages.must_bind"><code class="xref py py-obj docutils literal notranslate"><span class="pre">must_bind</span></code></a>(x)</p></td>
 <td><p>A function that raises a ValueError if the input is unbound.</p></td>
 </tr>
 </tbody>
@@ -293,28 +293,28 @@
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="pypedream.html#pypedream.DependencyInputMapper" title="pypedream.core.stages.DependencyInputMapper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DependencyInputMapper</span></code></a>(from_stage[, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pypedream.core.stages.DependencyInputMapper" title="pypedream.core.stages.DependencyInputMapper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DependencyInputMapper</span></code></a>(from_stage[, ...])</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="pypedream.html#pypedream.Input" title="pypedream.core.stages.Input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Input</span></code></a>(as_arg, bind[, logged])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#pypedream.core.stages.Input" title="pypedream.core.stages.Input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Input</span></code></a>(as_arg, bind[, logged])</p></td>
 <td><p>The Input class is a generic class that represents an input to a stage.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="pypedream.html#pypedream.InputBinding" title="pypedream.core.stages.InputBinding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InputBinding</span></code></a>(source, mapper, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pypedream.core.stages.InputBinding" title="pypedream.core.stages.InputBinding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InputBinding</span></code></a>(source, mapper, ...)</p></td>
 <td><p>An <cite>InputBinding[T, R]</cite> is used as part of an <cite>Input</cite> to a <cite>Stage</cite>.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="pypedream.html#pypedream.KeyedInputMapper" title="pypedream.core.stages.KeyedInputMapper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeyedInputMapper</span></code></a>(from_key[, default, required])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#pypedream.core.stages.KeyedInputMapper" title="pypedream.core.stages.KeyedInputMapper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeyedInputMapper</span></code></a>(from_key[, default, required])</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="pypedream.html#pypedream.KeyedOutputMapper" title="pypedream.core.stages.KeyedOutputMapper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeyedOutputMapper</span></code></a>(keys, str] = NOTHING, ...)</p></td>
-<td><p>An implementation of the StageOutputMapper protocol that maps a dictionary of values to a dictionary of outputs.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pypedream.core.stages.KeyedOutputMapper" title="pypedream.core.stages.KeyedOutputMapper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeyedOutputMapper</span></code></a>(keys, str] = NOTHING, ...)</p></td>
+<td><p>A callable used with stage that maps dictionary return values to a dictionary of outputs.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">OutputMapperBehaviour</span></code>(value[, names, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#pypedream.core.stages.OutputMapperBehaviour" title="pypedream.core.stages.OutputMapperBehaviour"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OutputMapperBehaviour</span></code></a>(value[, names, ...])</p></td>
 <td><p>Enum defining some basic behaviours for output mapper objects, mostly pertaining to how to handle outputs that are not explicitly defined in the mapper.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="pypedream.html#pypedream.SequentialOutputMapper" title="pypedream.core.stages.SequentialOutputMapper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SequentialOutputMapper</span></code></a>(keys, behaviour)</p></td>
-<td><p>An implementation of the StageOutputMapper protocol that maps an indexable sequence of values to a dictionary of outputs.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pypedream.core.stages.SequentialOutputMapper" title="pypedream.core.stages.SequentialOutputMapper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SequentialOutputMapper</span></code></a>(keys, behaviour)</p></td>
+<td><p>A callable used with stage that maps an indexable sequence of values to a dictionary of outputs.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="pypedream.html#pypedream.Stage" title="pypedream.core.stages.Stage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Stage</span></code></a>(function, ~pypedream.core.stages.R], ...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#pypedream.core.stages.Stage" title="pypedream.core.stages.Stage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Stage</span></code></a>(function, ~pypedream.core.stages.R], ...)</p></td>
 <td><p>A Stage is a wrapper around a function that is used in a Pipeline.</p></td>
 </tr>
 </tbody>
@@ -324,15 +324,570 @@
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="pypedream.exceptions.html#pypedream.exceptions.UnboundInputException" title="pypedream.core.stages.UnboundInputException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UnboundInputException</span></code></a>(binding, *args)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pypedream.core.stages.UnboundInputException" title="pypedream.core.stages.UnboundInputException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UnboundInputException</span></code></a>(binding, *args)</p></td>
 <td><p>Exception raised from InputBinding if an exception is raised in the mapper.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="pypedream.exceptions.html#pypedream.exceptions.UndefinedInputException" title="pypedream.core.stages.UndefinedInputException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UndefinedInputException</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#pypedream.core.stages.UndefinedInputException" title="pypedream.core.stages.UndefinedInputException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UndefinedInputException</span></code></a></p></td>
 <td><p>Utility exception for library defined mappers when an input cannot be retrieved.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<dl class="py function">
+<dt class="sig sig-object py" id="pypedream.core.stages.DEFAULT_OUTPUT_MAPPER">
+<span class="sig-prename descclassname"><span class="pre">pypedream.core.stages.</span></span><span class="sig-name descname"><span class="pre">DEFAULT_OUTPUT_MAPPER</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pypedream.core.stages.DEFAULT_OUTPUT_MAPPER" title="Link to this definition">¶</a></dt>
+<dd><p>Default output mapper that maps the return value of a stage to a dictionary
+with a single key <cite>DEFAULT_OUTPUT_KEY</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>Any</em>) – the return value of the stage</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary with the value of x mapped to the key <cite>DEFAULT_OUTPUT_KEY</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypedream.core.stages.DependencyInputMapper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypedream.core.stages.</span></span><span class="sig-name descname"><span class="pre">DependencyInputMapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">from_stage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">from_output</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'return'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'INPUT</span> <span class="pre">NOT</span> <span class="pre">FOUND'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pypedream.core.stages.DependencyInputMapper" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">R</span></code>]</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.stages.DependencyInputMapper.default">
+<span class="sig-name descname"><span class="pre">default</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">T</span></em><a class="headerlink" href="#pypedream.core.stages.DependencyInputMapper.default" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.stages.DependencyInputMapper.from_output">
+<span class="sig-name descname"><span class="pre">from_output</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pypedream.core.stages.DependencyInputMapper.from_output" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.stages.DependencyInputMapper.from_stage">
+<span class="sig-name descname"><span class="pre">from_stage</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pypedream.core.stages.DependencyInputMapper.from_stage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.stages.DependencyInputMapper.required">
+<span class="sig-name descname"><span class="pre">required</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#pypedream.core.stages.DependencyInputMapper.required" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypedream.core.stages.Input">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypedream.core.stages.</span></span><span class="sig-name descname"><span class="pre">Input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">as_arg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bind</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pypedream.core.stages.InputBinding" title="pypedream.core.stages.InputBinding"><span class="pre">InputBinding</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">R</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logged</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pypedream.core.stages.Input" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">R</span></code>]</p>
+<p>The Input class is a generic class that represents an input to a stage.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.stages.Input.as_arg">
+<span class="sig-name descname"><span class="pre">as_arg</span></span><a class="headerlink" href="#pypedream.core.stages.Input.as_arg" title="Link to this definition">¶</a></dt>
+<dd><p>the argument to pass the input as. This should match the name of the argument in the function signature of
+the stage that the input is being passed to.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.stages.Input.bind">
+<span class="sig-name descname"><span class="pre">bind</span></span><a class="headerlink" href="#pypedream.core.stages.Input.bind" title="Link to this definition">¶</a></dt>
+<dd><p>the binding that retrieves the input value when called.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pypedream.core.stages.InputBinding" title="pypedream.core.stages.InputBinding">InputBinding</a>[T, R]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.stages.Input.logged">
+<span class="sig-name descname"><span class="pre">logged</span></span><a class="headerlink" href="#pypedream.core.stages.Input.logged" title="Link to this definition">¶</a></dt>
+<dd><p>a flag indicating whether or not the input should be injected into the logging context when the stage is run.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">as_arg</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#id0" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">bind</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pypedream.core.stages.InputBinding" title="pypedream.core.stages.InputBinding"><span class="pre">InputBinding</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">R</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id1" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pypedream.core.stages.Input.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">R</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pypedream.core.stages.Input.get" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the input value as a dictionary with the key <cite>as_arg</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">logged</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#id2" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypedream.core.stages.InputBinding">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypedream.core.stages.</span></span><span class="sig-name descname"><span class="pre">InputBinding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">source:</span> <span class="pre">~pypedream.core.stages.T</span> <span class="pre">|</span> <span class="pre">~typing.Literal['UNBOUND']</span> <span class="pre">=</span> <span class="pre">'UNBOUND',</span> <span class="pre">mapper:</span> <span class="pre">~typing.Callable[[~pypedream.core.stages.T],</span> <span class="pre">~pypedream.core.stages.R]</span> <span class="pre">|</span> <span class="pre">~typing.Callable[[~pypedream.core.stages.T</span> <span class="pre">|</span> <span class="pre">~typing.Literal['UNBOUND']],</span> <span class="pre">~pypedream.core.stages.R]</span> <span class="pre">|</span> <span class="pre">~typing.Callable[[~_contextvars.ContextVar[~pypedream.core.stages.T]],</span> <span class="pre">~pypedream.core.stages.R]</span> <span class="pre">|</span> <span class="pre">~typing.Callable[[~typing.Callable[[...],</span> <span class="pre">~pypedream.core.stages.T]],</span> <span class="pre">~pypedream.core.stages.R]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">must_bind&gt;,</span> <span class="pre">defer:</span> <span class="pre">~_contextvars.ContextVar[~pypedream.core.stages.T]</span> <span class="pre">|</span> <span class="pre">~typing.Callable[[...],</span> <span class="pre">~pypedream.core.stages.T]</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pypedream.core.stages.InputBinding" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">R</span></code>]</p>
+<p>An <cite>InputBinding[T, R]</cite> is used as part of an <cite>Input</cite> to a <cite>Stage</cite>.</p>
+<p>i.e, suppose <cite>Stage</cite> has an argument of type <cite>R</cite>. To define an input to it we would
+use a binding to a source of type <cite>T</cite> with a mapper <cite>f:T-&gt;R</cite> that retrieves the
+value for the argument at the time of execution.</p>
+<p>It can either be a binding to a value known at the time of instantiation (of the binding)
+in which case you would use <cite>InputBinding.immediate</cite>, or a value to be retrieved
+from a context variable at execution time (of the <cite>Stage</cite> taking the <cite>Input</cite> that owns
+the <cite>InputBinding</cite>) in which case you’d use <cite>InputBinding.contextual</cite>, or to a function to
+be called at evaluation time via <cite>InputBinding.callback</cite></p>
+<p>See the docs of the aformentioned methods for more information.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.stages.InputBinding.source">
+<span class="sig-name descname"><span class="pre">source</span></span><a class="headerlink" href="#pypedream.core.stages.InputBinding.source" title="Link to this definition">¶</a></dt>
+<dd><p>The <cite>source</cite> of the input, this may be the value itself (i.e T == R) or a value
+from which the input can be retrieved. How it is retrieved from the source is handled
+by the <cite>mapper</cite>. An uninitialized InputBinding or one that is evaluated at execution
+time via a <cite>ContextVar</cite> will have <cite>source == UNBOUND</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>T | UNBOUND_T, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.stages.InputBinding.mapper">
+<span class="sig-name descname"><span class="pre">mapper</span></span><a class="headerlink" href="#pypedream.core.stages.InputBinding.mapper" title="Link to this definition">¶</a></dt>
+<dd><p>The function called when the <cite>InputBinding</cite> is evaluated. The <cite>mapper</cite> is responsible
+for behaviours like default values, error handling, etc.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>BindingMapperType, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.stages.InputBinding.defer">
+<span class="sig-name descname"><span class="pre">defer</span></span><a class="headerlink" href="#pypedream.core.stages.InputBinding.defer" title="Link to this definition">¶</a></dt>
+<dd><p>The <cite>ContextVar</cite> to defer to, if any. If</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ContextVar[T] | Callable[…, T] | None, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pypedream.core.stages.InputBinding.callback">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">fun:</span> <span class="pre">~typing.Callable[[~P],</span> <span class="pre">~pypedream.core.stages.T],</span> <span class="pre">*cbargs:</span> <span class="pre">~typing.~P,</span> <span class="pre">mapper:</span> <span class="pre">~typing.Callable[[~pypedream.core.stages.T],</span> <span class="pre">~pypedream.core.stages.R]</span> <span class="pre">|</span> <span class="pre">~typing.Callable[[~pypedream.core.stages.T</span> <span class="pre">|</span> <span class="pre">~typing.Literal['UNBOUND']],</span> <span class="pre">~pypedream.core.stages.R]</span> <span class="pre">|</span> <span class="pre">~typing.Callable[[~_contextvars.ContextVar[~pypedream.core.stages.T]],</span> <span class="pre">~pypedream.core.stages.R]</span> <span class="pre">|</span> <span class="pre">~typing.Callable[[~typing.Callable[[...],</span> <span class="pre">~pypedream.core.stages.T]],</span> <span class="pre">~pypedream.core.stages.R]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">must_bind&gt;,</span> <span class="pre">call_first:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True,</span> <span class="pre">**cbkwargs:</span> <span class="pre">~typing.~P</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pypedream.core.stages.InputBinding" title="pypedream.core.stages.InputBinding"><span class="pre">InputBinding</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">R</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pypedream.core.stages.InputBinding.callback" title="Link to this definition">¶</a></dt>
+<dd><p>An InputBinding that defers the evaluation of the input until the stage is run via
+a closure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fun</strong> (<em>Callable</em><em>[</em><em>P</em><em>, </em><em>T</em><em>]</em>) – A function taking paramaters P returning a value of type T to be called at
+evaluation of the input</p></li>
+<li><p><strong>*cbargs</strong> (<em>P.args</em>) – Positional arguments matching the signature of <cite>fun</cite>. Passed to <cite>fun</cite> at evaluation time.</p></li>
+<li><p><strong>mapper</strong> (<em>BindingMapperType</em><em>[</em><em>T</em><em>, </em><em>R</em><em>]</em><em>, </em><em>optional</em>) – Function that will take the output of <cite>fun</cite> and map it to the expected type of the input,
+default <cite>must_bind</cite> as usual</p></li>
+<li><p><strong>call_first</strong> (<em>bool</em><em>, </em><em>optional</em>) – whether or not <cite>fun</cite> should be called and have the result passed into <cite>mapper</cite>
+or just be directly passed in to <cite>mapper</cite>. if <cite>False</cite> then <cite>*cbargs</cite> and <cite>**cbkwargs</cite> are
+meaningless as the class has no power to enforce how the function is called, and
+you should be using a custom mapper… If you’re actually meaning to use a function
+as an argument to a stage then bind with <cite>InputBinding.immediate</cite></p></li>
+<li><p><strong>**cbkwargs</strong> (<em>P.kwargs</em>) – Keyword arguments matching the signature of <cite>fun</cite>. Passed to <cite>fun</cite> at evaluation time.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#pypedream.core.stages.InputBinding" title="pypedream.core.stages.InputBinding">InputBinding</a>[T, R]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pypedream.core.stages.InputBinding.contextual">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">contextual</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">source:</span> <span class="pre">~_contextvars.ContextVar[~pypedream.core.stages.T],</span> <span class="pre">mapper:</span> <span class="pre">~typing.Callable[[~pypedream.core.stages.T],</span> <span class="pre">~pypedream.core.stages.R]</span> <span class="pre">|</span> <span class="pre">~typing.Callable[[~pypedream.core.stages.T</span> <span class="pre">|</span> <span class="pre">~typing.Literal['UNBOUND']],</span> <span class="pre">~pypedream.core.stages.R]</span> <span class="pre">|</span> <span class="pre">~typing.Callable[[~_contextvars.ContextVar[~pypedream.core.stages.T]],</span> <span class="pre">~pypedream.core.stages.R]</span> <span class="pre">|</span> <span class="pre">~typing.Callable[[~typing.Callable[[...],</span> <span class="pre">~pypedream.core.stages.T]],</span> <span class="pre">~pypedream.core.stages.R]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">must_bind&gt;,</span> <span class="pre">get_first:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pypedream.core.stages.InputBinding" title="pypedream.core.stages.InputBinding"><span class="pre">InputBinding</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">R</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pypedream.core.stages.InputBinding.contextual" title="Link to this definition">¶</a></dt>
+<dd><p>An input binding that defers the evaluation of the input until the stage is run
+via a ContextVar</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> (<em>ContextVar</em><em>[</em><em>T</em><em>]</em>) – A <cite>ContextVar</cite> referencing the source of the value, to be retrieved from in the
+execution context of the stage</p></li>
+<li><p><strong>mapper</strong> (<em>BindingMapperType</em><em>[</em><em>T</em><em>, </em><em>R</em><em>]</em><em>, </em><em>optional</em>) – A function that expects either a <cite>T</cite>, the unit type <cite>UNBOUND_T</cite> (value <cite>UNBOUND</cite>), or
+a <cite>ContextVar[T]</cite>. The correct signature depends on the next argument <cite>get_first</cite>.
+Defaults to <cite>must_bind</cite></p></li>
+<li><p><strong>get_first</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether or not to call <cite>.get()</cite> on the <cite>ContextVar</cite> being deferred to before passing it
+into the <cite>mapper</cite>. Defaults to <cite>True</cite> so it can be passed into <cite>must_bind</cite> which will
+just return the value. However, this means that if the <cite>.get()</cite> raises <cite>LookupError</cite> it
+will not be handled.
+To handle the case where <cite>.get()</cite> fails, pass <cite>get_first = False</cite> and a custom <cite>mapper</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#pypedream.core.stages.InputBinding" title="pypedream.core.stages.InputBinding">InputBinding</a>[T, R]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">defer</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ContextVar</span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#id3" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pypedream.core.stages.InputBinding.deferred">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">deferred</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">source:</span> <span class="pre">~_contextvars.ContextVar[~pypedream.core.stages.T],</span> <span class="pre">mapper:</span> <span class="pre">~typing.Callable[[~pypedream.core.stages.T],</span> <span class="pre">~pypedream.core.stages.R]</span> <span class="pre">|</span> <span class="pre">~typing.Callable[[~pypedream.core.stages.T</span> <span class="pre">|</span> <span class="pre">~typing.Literal['UNBOUND']],</span> <span class="pre">~pypedream.core.stages.R]</span> <span class="pre">|</span> <span class="pre">~typing.Callable[[~_contextvars.ContextVar[~pypedream.core.stages.T]],</span> <span class="pre">~pypedream.core.stages.R]</span> <span class="pre">|</span> <span class="pre">~typing.Callable[[~typing.Callable[[...],</span> <span class="pre">~pypedream.core.stages.T]],</span> <span class="pre">~pypedream.core.stages.R]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">must_bind&gt;,</span> <span class="pre">get_first:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pypedream.core.stages.InputBinding" title="pypedream.core.stages.InputBinding"><span class="pre">InputBinding</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">R</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pypedream.core.stages.InputBinding.deferred" title="Link to this definition">¶</a></dt>
+<dd><p>replaced by <cite>contextual</cite></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pypedream.core.stages.InputBinding.immediate">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">immediate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">source:</span> <span class="pre">~pypedream.core.stages.T,</span> <span class="pre">mapper:</span> <span class="pre">~typing.Callable[[~pypedream.core.stages.T],</span> <span class="pre">~pypedream.core.stages.R]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">must_bind&gt;</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pypedream.core.stages.InputBinding" title="pypedream.core.stages.InputBinding"><span class="pre">InputBinding</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">R</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pypedream.core.stages.InputBinding.immediate" title="Link to this definition">¶</a></dt>
+<dd><p>Bind to a known value that can be directly passed in to the input or mapped from</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> (<em>T</em>) – The source of the input</p></li>
+<li><p><strong>mapper</strong> (<em>Callable</em><em>[</em><em>[</em><em>T</em><em>]</em><em>, </em><em>R</em><em>]</em>) – A callable to apply to <cite>source</cite> to get the input value. <cite>must_bind</cite> by default, which will
+just return <cite>source</cite> given it is not <cite>UNBOUND</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#pypedream.core.stages.InputBinding" title="pypedream.core.stages.InputBinding">InputBinding</a>[T, R]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">mapper</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">R</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'UNBOUND'</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">R</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">ContextVar</span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">R</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">R</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id4" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pypedream.core.stages.InputBinding.now">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">now</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">source:</span> <span class="pre">~pypedream.core.stages.T,</span> <span class="pre">mapper:</span> <span class="pre">~typing.Callable[[~pypedream.core.stages.T],</span> <span class="pre">~pypedream.core.stages.R]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">must_bind&gt;</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pypedream.core.stages.InputBinding" title="pypedream.core.stages.InputBinding"><span class="pre">InputBinding</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">R</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pypedream.core.stages.InputBinding.now" title="Link to this definition">¶</a></dt>
+<dd><p>replaced by <cite>immediate</cite></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">source</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">T</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'UNBOUND'</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id5" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypedream.core.stages.KeyedInputMapper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypedream.core.stages.</span></span><span class="sig-name descname"><span class="pre">KeyedInputMapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">from_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'INPUT</span> <span class="pre">NOT</span> <span class="pre">FOUND'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pypedream.core.stages.KeyedInputMapper" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">R</span></code>]</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.stages.KeyedInputMapper.default">
+<span class="sig-name descname"><span class="pre">default</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">T</span></em><a class="headerlink" href="#pypedream.core.stages.KeyedInputMapper.default" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.stages.KeyedInputMapper.from_key">
+<span class="sig-name descname"><span class="pre">from_key</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pypedream.core.stages.KeyedInputMapper.from_key" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.stages.KeyedInputMapper.required">
+<span class="sig-name descname"><span class="pre">required</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#pypedream.core.stages.KeyedInputMapper.required" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypedream.core.stages.KeyedOutputMapper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypedream.core.stages.</span></span><span class="sig-name descname"><span class="pre">KeyedOutputMapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keys:</span> <span class="pre">dict[str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">str]</span> <span class="pre">=</span> <span class="pre">NOTHING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">behaviour:</span> <span class="pre">~pypedream.core.stages.OutputMapperBehaviour</span> <span class="pre">=</span> <span class="pre">&lt;OutputMapperBehaviour.STRICT:</span> <span class="pre">1&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pypedream.core.stages.KeyedOutputMapper" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A callable used with stage that maps dictionary return values to a dictionary of outputs.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.stages.KeyedOutputMapper.keys">
+<span class="sig-name descname"><span class="pre">keys</span></span><a class="headerlink" href="#pypedream.core.stages.KeyedOutputMapper.keys" title="Link to this definition">¶</a></dt>
+<dd><p>a dictionary mapping keys to look for in output to the keys to store values under.
+If a key in the dictionary is not in the keys, an error will be raised.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.stages.KeyedOutputMapper.behaviour">
+<span class="sig-name descname"><span class="pre">behaviour</span></span><a class="headerlink" href="#pypedream.core.stages.KeyedOutputMapper.behaviour" title="Link to this definition">¶</a></dt>
+<dd><p>a flag indicating how to handle unexpected outputs in the input dictionary.
+- <cite>STRICT</cite>: raise an error if a key in the input dictionary is not in <cite>self.keys</cite>
+- <cite>CHILL</cite>: map what can be mapped, ignore the rest (extra or missing).. just chill out.
+- <cite>PRESERVE</cite>: Extra outputs will be stored under the key that they were found under in the input dictionary. User should be careful to avoid key conflicts.
+- <cite>WARN_UNEXPECTED</cite>: log a warning on unexpected outputs. This should be used in conjunction with another behaviour.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pypedream.core.stages.OutputMapperBehaviour" title="pypedream.core.stages.OutputMapperBehaviour">OutputMapperBehaviour</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id6">
+<span class="sig-name descname"><span class="pre">behaviour</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pypedream.core.stages.OutputMapperBehaviour" title="pypedream.core.stages.OutputMapperBehaviour"><span class="pre">OutputMapperBehaviour</span></a></em><a class="headerlink" href="#id6" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id7">
+<span class="sig-name descname"><span class="pre">keys</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id7" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypedream.core.stages.OutputMapperBehaviour">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypedream.core.stages.</span></span><span class="sig-name descname"><span class="pre">OutputMapperBehaviour</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names=&lt;not</span> <span class="pre">given&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start=1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pypedream.core.stages.OutputMapperBehaviour" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Flag</span></code></p>
+<p>Enum defining some basic behaviours for output mapper objects, mostly pertaining to how to handle
+outputs that are not explicitly defined in the mapper.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.stages.OutputMapperBehaviour.CHILL">
+<span class="sig-name descname"><span class="pre">CHILL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#pypedream.core.stages.OutputMapperBehaviour.CHILL" title="Link to this definition">¶</a></dt>
+<dd><p>Map what can be mapped, ignore the rest (extra or missing).. just chill out.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.stages.OutputMapperBehaviour.PRESERVE">
+<span class="sig-name descname"><span class="pre">PRESERVE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#pypedream.core.stages.OutputMapperBehaviour.PRESERVE" title="Link to this definition">¶</a></dt>
+<dd><p>Map what can be mapped explicitly as expected, and handle mapping of unexpected outputs in a way that preserves them.
+The key that unexpected outputs will be stored under is implementation specific.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.stages.OutputMapperBehaviour.STRICT">
+<span class="sig-name descname"><span class="pre">STRICT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#pypedream.core.stages.OutputMapperBehaviour.STRICT" title="Link to this definition">¶</a></dt>
+<dd><p>Raise an error if the mapper receives an input that does not have an explicitly defined mapping.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.stages.OutputMapperBehaviour.WARN_UNEXPECTED">
+<span class="sig-name descname"><span class="pre">WARN_UNEXPECTED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></em><a class="headerlink" href="#pypedream.core.stages.OutputMapperBehaviour.WARN_UNEXPECTED" title="Link to this definition">¶</a></dt>
+<dd><p>Log a warning on unexpected outputs. This should be used in conjunction with another behaviour.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypedream.core.stages.SequentialOutputMapper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypedream.core.stages.</span></span><span class="sig-name descname"><span class="pre">SequentialOutputMapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keys:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">NOTHING</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">behaviour:</span> <span class="pre">~pypedream.core.stages.OutputMapperBehaviour</span> <span class="pre">=</span> <span class="pre">&lt;OutputMapperBehaviour.STRICT:</span> <span class="pre">1&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pypedream.core.stages.SequentialOutputMapper" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A callable used with stage that maps an indexable sequence of values to a dictionary of outputs.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.stages.SequentialOutputMapper.keys">
+<span class="sig-name descname"><span class="pre">keys</span></span><a class="headerlink" href="#pypedream.core.stages.SequentialOutputMapper.keys" title="Link to this definition">¶</a></dt>
+<dd><p>a list of keys to map the values to. The length of this list should match the length of the sequence.
+If the length of the sequence is not equal to the length of the keys, the behaviour will determine how to handle this.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.stages.SequentialOutputMapper.behaviour">
+<span class="sig-name descname"><span class="pre">behaviour</span></span><a class="headerlink" href="#pypedream.core.stages.SequentialOutputMapper.behaviour" title="Link to this definition">¶</a></dt>
+<dd><p>flag indicating how to handle unexpected outputs in the sequence.
+- <cite>STRICT</cite>: raise an error if the length of the iterable does not match the length of the keys
+- <cite>CHILL</cite>: map what can be mapped, ignore the rest (extra or missing).. just chill out.
+- <cite>PRESERVE</cite>: Extra outputs will be stored under <cite>SequenceOutputMapper.EXTRA_MAPPING_KEY</cite>
+- <cite>WARN_UNEXPECTED</cite>: log a warning on unexpected outputs. This should be used in conjunction with another behaviour.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pypedream.core.stages.OutputMapperBehaviour" title="pypedream.core.stages.OutputMapperBehaviour">OutputMapperBehaviour</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pypedream.core.stages.SequentialOutputMapper.__call__">
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">StageOutputs</span></span></span><a class="headerlink" href="#pypedream.core.stages.SequentialOutputMapper.__call__" title="Link to this definition">¶</a></dt>
+<dd><p>Maps the iterable x to a dictionary of outputs.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.stages.SequentialOutputMapper.EXTRA_MAPPING_KEY">
+<span class="sig-name descname"><span class="pre">EXTRA_MAPPING_KEY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'_extra'</span></em><a class="headerlink" href="#pypedream.core.stages.SequentialOutputMapper.EXTRA_MAPPING_KEY" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id8">
+<span class="sig-name descname"><span class="pre">behaviour</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pypedream.core.stages.OutputMapperBehaviour" title="pypedream.core.stages.OutputMapperBehaviour"><span class="pre">OutputMapperBehaviour</span></a></em><a class="headerlink" href="#id8" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id9">
+<span class="sig-name descname"><span class="pre">keys</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id9" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypedream.core.stages.Stage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypedream.core.stages.</span></span><span class="sig-name descname"><span class="pre">Stage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">function:</span> <span class="pre">~typing.Callable[[~P],</span> <span class="pre">~pypedream.core.stages.R],</span> <span class="pre">inputs:</span> <span class="pre">list[~pypedream.core.stages.Input]</span> <span class="pre">=</span> <span class="pre">NOTHING,</span> <span class="pre">has_run:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False,</span> <span class="pre">outputs:</span> <span class="pre">dict[str,</span> <span class="pre">~typing.Any]</span> <span class="pre">=</span> <span class="pre">NOTHING,</span> <span class="pre">output_mapper:</span> <span class="pre">~typing.Callable[[~pypedream.core.stages.R],</span> <span class="pre">dict[str,</span> <span class="pre">~typing.Any]]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">DEFAULT_OUTPUT_MAPPER&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pypedream.core.stages.Stage" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">P</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">R</span></code>]</p>
+<p>A Stage is a wrapper around a function that is used in a Pipeline. It is currently tightly coupled to the Pipeline object.
+This may change in the future.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.stages.Stage.function">
+<span class="sig-name descname"><span class="pre">function</span></span><a class="headerlink" href="#pypedream.core.stages.Stage.function" title="Link to this definition">¶</a></dt>
+<dd><p>the function to run as the stage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Callable[P, R]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.stages.Stage.has_run">
+<span class="sig-name descname"><span class="pre">has_run</span></span><a class="headerlink" href="#pypedream.core.stages.Stage.has_run" title="Link to this definition">¶</a></dt>
+<dd><p>a flag indicating whether the stage has been run in the context of a pipeline</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.stages.Stage.inputs">
+<span class="sig-name descname"><span class="pre">inputs</span></span><a class="headerlink" href="#pypedream.core.stages.Stage.inputs" title="Link to this definition">¶</a></dt>
+<dd><p>a list of objects conforming to the StageInputMapping protocol
+that define what and how to pass arguments to the stage in the
+context of a pipeline</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>StageInputs</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.stages.Stage.outputs">
+<span class="sig-name descname"><span class="pre">outputs</span></span><a class="headerlink" href="#pypedream.core.stages.Stage.outputs" title="Link to this definition">¶</a></dt>
+<dd><p>a dictionary mapping keys to the results of the stage</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>StageOutputs</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.stages.Stage.output_mapper">
+<span class="sig-name descname"><span class="pre">output_mapper</span></span><a class="headerlink" href="#pypedream.core.stages.Stage.output_mapper" title="Link to this definition">¶</a></dt>
+<dd><p>a function that maps the return value of the stage to a dictionary
+of outputs. By default, this function returns a dictionary with a
+single key “return” that maps to the return value of the stage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Callable[[R], StageOutputs]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id10">
+<span class="sig-name descname"><span class="pre">function</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">P</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">R</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id10" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id11">
+<span class="sig-name descname"><span class="pre">has_run</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#id11" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id12">
+<span class="sig-name descname"><span class="pre">inputs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pypedream.core.stages.Input" title="pypedream.core.stages.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id12" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id13">
+<span class="sig-name descname"><span class="pre">output_mapper</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">R</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id13" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id14">
+<span class="sig-name descname"><span class="pre">outputs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id14" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pypedream.core.stages.Stage.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#pypedream.core.stages.Stage.reset" title="Link to this definition">¶</a></dt>
+<dd><p>resets all internal state except for defaults</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pypedream.core.stages.Stage.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">R</span></span></span><a class="headerlink" href="#pypedream.core.stages.Stage.run" title="Link to this definition">¶</a></dt>
+<dd><p>runs the stage, kwargs will override any inputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>kwargs</strong> (<em>dict</em>) – keyword arguments that will override the inputs of the stage, be careful as these are not
+validated so you may get unexpected results if you pass the wrong keys and the function
+signature does not accept arbitrary keyword arguments.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the return value of the function, which is also stored in the outputs attribute,
+be careful if this is something mutable.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>R</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypedream.core.stages.StageKey">
+<span class="sig-prename descclassname"><span class="pre">pypedream.core.stages.</span></span><span class="sig-name descname"><span class="pre">StageKey</span></span><a class="headerlink" href="#pypedream.core.stages.StageKey" title="Link to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pypedream.core.stages.UnboundInputException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypedream.core.stages.</span></span><span class="sig-name descname"><span class="pre">UnboundInputException</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">binding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pypedream.core.stages.InputBinding" title="pypedream.core.stages.InputBinding"><span class="pre">InputBinding</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pypedream.core.stages.UnboundInputException" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Exception raised from InputBinding if an exception is raised in the mapper.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pypedream.core.stages.UndefinedInputException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypedream.core.stages.</span></span><span class="sig-name descname"><span class="pre">UndefinedInputException</span></span><a class="headerlink" href="#pypedream.core.stages.UndefinedInputException" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Utility exception for library defined mappers when an input cannot be retrieved.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pypedream.core.stages.must_bind">
+<span class="sig-prename descclassname"><span class="pre">pypedream.core.stages.</span></span><span class="sig-name descname"><span class="pre">must_bind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'UNBOUND'</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">T</span></span></span><a class="headerlink" href="#pypedream.core.stages.must_bind" title="Link to this definition">¶</a></dt>
+<dd><p>A function that raises a ValueError if the input is unbound. Used as a default mapper for bindings.</p>
+</dd></dl>
+
 </section>
 
         </article>
@@ -378,8 +933,106 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">pypedream.core.stages</a><ul>
+<li><a class="reference internal" href="#pypedream.core.stages.DEFAULT_OUTPUT_MAPPER"><code class="docutils literal notranslate"><span class="pre">DEFAULT_OUTPUT_MAPPER()</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.DependencyInputMapper"><code class="docutils literal notranslate"><span class="pre">DependencyInputMapper</span></code></a><ul>
+<li><a class="reference internal" href="#pypedream.core.stages.DependencyInputMapper.default"><code class="docutils literal notranslate"><span class="pre">DependencyInputMapper.default</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.DependencyInputMapper.from_output"><code class="docutils literal notranslate"><span class="pre">DependencyInputMapper.from_output</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.DependencyInputMapper.from_stage"><code class="docutils literal notranslate"><span class="pre">DependencyInputMapper.from_stage</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.DependencyInputMapper.required"><code class="docutils literal notranslate"><span class="pre">DependencyInputMapper.required</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pypedream.core.stages.Input"><code class="docutils literal notranslate"><span class="pre">Input</span></code></a><ul>
+<li><a class="reference internal" href="#pypedream.core.stages.Input.as_arg"><code class="docutils literal notranslate"><span class="pre">Input.as_arg</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.Input.bind"><code class="docutils literal notranslate"><span class="pre">Input.bind</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.Input.logged"><code class="docutils literal notranslate"><span class="pre">Input.logged</span></code></a></li>
+<li><a class="reference internal" href="#id0"><code class="docutils literal notranslate"><span class="pre">Input.as_arg</span></code></a></li>
+<li><a class="reference internal" href="#id1"><code class="docutils literal notranslate"><span class="pre">Input.bind</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.Input.get"><code class="docutils literal notranslate"><span class="pre">Input.get()</span></code></a></li>
+<li><a class="reference internal" href="#id2"><code class="docutils literal notranslate"><span class="pre">Input.logged</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pypedream.core.stages.InputBinding"><code class="docutils literal notranslate"><span class="pre">InputBinding</span></code></a><ul>
+<li><a class="reference internal" href="#pypedream.core.stages.InputBinding.source"><code class="docutils literal notranslate"><span class="pre">InputBinding.source</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.InputBinding.mapper"><code class="docutils literal notranslate"><span class="pre">InputBinding.mapper</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.InputBinding.defer"><code class="docutils literal notranslate"><span class="pre">InputBinding.defer</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.InputBinding.callback"><code class="docutils literal notranslate"><span class="pre">InputBinding.callback()</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.InputBinding.contextual"><code class="docutils literal notranslate"><span class="pre">InputBinding.contextual()</span></code></a></li>
+<li><a class="reference internal" href="#id3"><code class="docutils literal notranslate"><span class="pre">InputBinding.defer</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.InputBinding.deferred"><code class="docutils literal notranslate"><span class="pre">InputBinding.deferred()</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.InputBinding.immediate"><code class="docutils literal notranslate"><span class="pre">InputBinding.immediate()</span></code></a></li>
+<li><a class="reference internal" href="#id4"><code class="docutils literal notranslate"><span class="pre">InputBinding.mapper</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.InputBinding.now"><code class="docutils literal notranslate"><span class="pre">InputBinding.now()</span></code></a></li>
+<li><a class="reference internal" href="#id5"><code class="docutils literal notranslate"><span class="pre">InputBinding.source</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pypedream.core.stages.KeyedInputMapper"><code class="docutils literal notranslate"><span class="pre">KeyedInputMapper</span></code></a><ul>
+<li><a class="reference internal" href="#pypedream.core.stages.KeyedInputMapper.default"><code class="docutils literal notranslate"><span class="pre">KeyedInputMapper.default</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.KeyedInputMapper.from_key"><code class="docutils literal notranslate"><span class="pre">KeyedInputMapper.from_key</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.KeyedInputMapper.required"><code class="docutils literal notranslate"><span class="pre">KeyedInputMapper.required</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pypedream.core.stages.KeyedOutputMapper"><code class="docutils literal notranslate"><span class="pre">KeyedOutputMapper</span></code></a><ul>
+<li><a class="reference internal" href="#pypedream.core.stages.KeyedOutputMapper.keys"><code class="docutils literal notranslate"><span class="pre">KeyedOutputMapper.keys</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.KeyedOutputMapper.behaviour"><code class="docutils literal notranslate"><span class="pre">KeyedOutputMapper.behaviour</span></code></a></li>
+<li><a class="reference internal" href="#id6"><code class="docutils literal notranslate"><span class="pre">KeyedOutputMapper.behaviour</span></code></a></li>
+<li><a class="reference internal" href="#id7"><code class="docutils literal notranslate"><span class="pre">KeyedOutputMapper.keys</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pypedream.core.stages.OutputMapperBehaviour"><code class="docutils literal notranslate"><span class="pre">OutputMapperBehaviour</span></code></a><ul>
+<li><a class="reference internal" href="#pypedream.core.stages.OutputMapperBehaviour.CHILL"><code class="docutils literal notranslate"><span class="pre">OutputMapperBehaviour.CHILL</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.OutputMapperBehaviour.PRESERVE"><code class="docutils literal notranslate"><span class="pre">OutputMapperBehaviour.PRESERVE</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.OutputMapperBehaviour.STRICT"><code class="docutils literal notranslate"><span class="pre">OutputMapperBehaviour.STRICT</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.OutputMapperBehaviour.WARN_UNEXPECTED"><code class="docutils literal notranslate"><span class="pre">OutputMapperBehaviour.WARN_UNEXPECTED</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pypedream.core.stages.SequentialOutputMapper"><code class="docutils literal notranslate"><span class="pre">SequentialOutputMapper</span></code></a><ul>
+<li><a class="reference internal" href="#pypedream.core.stages.SequentialOutputMapper.keys"><code class="docutils literal notranslate"><span class="pre">SequentialOutputMapper.keys</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.SequentialOutputMapper.behaviour"><code class="docutils literal notranslate"><span class="pre">SequentialOutputMapper.behaviour</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.SequentialOutputMapper.__call__"><code class="docutils literal notranslate"><span class="pre">SequentialOutputMapper.__call__()</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.SequentialOutputMapper.EXTRA_MAPPING_KEY"><code class="docutils literal notranslate"><span class="pre">SequentialOutputMapper.EXTRA_MAPPING_KEY</span></code></a></li>
+<li><a class="reference internal" href="#id8"><code class="docutils literal notranslate"><span class="pre">SequentialOutputMapper.behaviour</span></code></a></li>
+<li><a class="reference internal" href="#id9"><code class="docutils literal notranslate"><span class="pre">SequentialOutputMapper.keys</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pypedream.core.stages.Stage"><code class="docutils literal notranslate"><span class="pre">Stage</span></code></a><ul>
+<li><a class="reference internal" href="#pypedream.core.stages.Stage.function"><code class="docutils literal notranslate"><span class="pre">Stage.function</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.Stage.has_run"><code class="docutils literal notranslate"><span class="pre">Stage.has_run</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.Stage.inputs"><code class="docutils literal notranslate"><span class="pre">Stage.inputs</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.Stage.outputs"><code class="docutils literal notranslate"><span class="pre">Stage.outputs</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.Stage.output_mapper"><code class="docutils literal notranslate"><span class="pre">Stage.output_mapper</span></code></a></li>
+<li><a class="reference internal" href="#id10"><code class="docutils literal notranslate"><span class="pre">Stage.function</span></code></a></li>
+<li><a class="reference internal" href="#id11"><code class="docutils literal notranslate"><span class="pre">Stage.has_run</span></code></a></li>
+<li><a class="reference internal" href="#id12"><code class="docutils literal notranslate"><span class="pre">Stage.inputs</span></code></a></li>
+<li><a class="reference internal" href="#id13"><code class="docutils literal notranslate"><span class="pre">Stage.output_mapper</span></code></a></li>
+<li><a class="reference internal" href="#id14"><code class="docutils literal notranslate"><span class="pre">Stage.outputs</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.Stage.reset"><code class="docutils literal notranslate"><span class="pre">Stage.reset()</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.Stage.run"><code class="docutils literal notranslate"><span class="pre">Stage.run()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pypedream.core.stages.StageKey"><code class="docutils literal notranslate"><span class="pre">StageKey</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.UnboundInputException"><code class="docutils literal notranslate"><span class="pre">UnboundInputException</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.UndefinedInputException"><code class="docutils literal notranslate"><span class="pre">UndefinedInputException</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.core.stages.must_bind"><code class="docutils literal notranslate"><span class="pre">must_bind()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

@@ -3,16 +3,16 @@ pypedream.logging
 
 .. automodule:: pypedream.logging
 
-   
-   
-   
 
-   
-   
+
+
+
+
+
    .. rubric:: Functions
 
    .. autosummary::
-   
+
       critical
       debug
       error
@@ -20,16 +20,3 @@ pypedream.logging
       info
       log
       warning
-   
-   
-
-   
-   
-   
-
-   
-   
-   
-
-
-
