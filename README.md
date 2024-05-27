@@ -1,6 +1,6 @@
 # *pypedream*: pipelines, in just python
 <p align="center">
-    <img src="./_docs/source/_static/pypedream.webp" width=150 height=150>
+    <img src="./_docsrc/_static/pypedream.webp" width=150 height=150>
 </p>
 
 
