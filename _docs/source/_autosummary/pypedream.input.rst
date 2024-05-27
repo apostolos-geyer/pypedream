@@ -14,7 +14,7 @@
    .. autosummary::
    
       dependency
-      known
+      immediate
       param
       var
    

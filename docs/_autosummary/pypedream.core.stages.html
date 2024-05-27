@@ -284,7 +284,7 @@
 <td><p>Default output mapper that maps the return value of a stage to a dictionary with a single key <cite>DEFAULT_OUTPUT_KEY</cite></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">must_bind</span></code>(x)</p></td>
-<td><p>A function that raises an UnboundInputException if the input is unbound.</p></td>
+<td><p>A function that raises a ValueError if the input is unbound.</p></td>
 </tr>
 </tbody>
 </table>
@@ -300,7 +300,7 @@
 <td><p>The Input class is a generic class that represents an input to a stage.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="pypedream.html#pypedream.InputBinding" title="pypedream.core.stages.InputBinding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InputBinding</span></code></a>(source, mapper, ...)</p></td>
-<td><p></p></td>
+<td><p>An <cite>InputBinding[T, R]</cite> is used as part of an <cite>Input</cite> to a <cite>Stage</cite>.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="pypedream.html#pypedream.KeyedInputMapper" title="pypedream.core.stages.KeyedInputMapper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeyedInputMapper</span></code></a>(from_key[, default, required])</p></td>
 <td><p></p></td>
@@ -324,11 +324,11 @@
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="pypedream.exceptions.html#pypedream.exceptions.UnboundInputException" title="pypedream.core.stages.UnboundInputException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UnboundInputException</span></code></a></p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pypedream.exceptions.html#pypedream.exceptions.UnboundInputException" title="pypedream.core.stages.UnboundInputException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UnboundInputException</span></code></a>(binding, *args)</p></td>
+<td><p>Exception raised from InputBinding if an exception is raised in the mapper.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="pypedream.exceptions.html#pypedream.exceptions.UndefinedInputException" title="pypedream.core.stages.UndefinedInputException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UndefinedInputException</span></code></a></p></td>
-<td><p></p></td>
+<td><p>Utility exception for library defined mappers when an input cannot be retrieved.</p></td>
 </tr>
 </tbody>
 </table>

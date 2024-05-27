@@ -18,7 +18,7 @@ from pypedream.ctx import PARAMETERS, STAGES, VARIABLES
 T = TypeVar("T")
 
 
-def known(
+def immediate(
     value: T,
     as_arg: str,
     logged: bool = False,
@@ -44,7 +44,7 @@ def known(
     """
     return Input(
         as_arg=as_arg,
-        bind=InputBinding.now(value),
+        bind=InputBinding.immediate(value),
         logged=logged,
     )
 
@@ -83,7 +83,7 @@ def param(
     """
     return Input(
         as_arg=as_arg,
-        bind=InputBinding.deferred(
+        bind=InputBinding.contextual(
             PARAMETERS,
             mapper=(
                 KeyedInputMapper(
@@ -131,7 +131,7 @@ def var(
     """
     return Input(
         as_arg=as_arg,
-        bind=InputBinding.deferred(
+        bind=InputBinding.contextual(
             VARIABLES,
             mapper=(
                 KeyedInputMapper(
@@ -186,7 +186,7 @@ def dependency(
 
     return Input(
         as_arg=as_arg,
-        bind=InputBinding.deferred(
+        bind=InputBinding.contextual(
             STAGES,
             DependencyInputMapper(
                 from_stage=from_stage,

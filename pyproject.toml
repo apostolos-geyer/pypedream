@@ -23,6 +23,8 @@ pydata-sphinx-theme = "^0.15.2"
 sphinx-rtd-theme = "^2.0.0"
 pre-commit = "^3.7.1"
 furo = "^2024.5.6"
+pytest = "^8.2.1"
+pytest-cov = "^5.0.0"
 
 [build-system]
 requires = ["poetry-core"]

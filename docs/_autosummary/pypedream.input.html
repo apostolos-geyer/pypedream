@@ -284,7 +284,7 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#pypedream.input.dependency" title="pypedream.input.dependency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dependency</span></code></a>(from_stage, as_arg[, ...])</p></td>
 <td><p>Create an input object that binds to an output of another stage</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#pypedream.input.known" title="pypedream.input.known"><code class="xref py py-obj docutils literal notranslate"><span class="pre">known</span></code></a>(value, as_arg[, logged])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#pypedream.input.immediate" title="pypedream.input.immediate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">immediate</span></code></a>(value, as_arg[, logged])</p></td>
 <td><p>Create an Input object that binds to a known value</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#pypedream.input.param" title="pypedream.input.param"><code class="xref py py-obj docutils literal notranslate"><span class="pre">param</span></code></a>(name, as_arg[, default, required, logged])</p></td>
@@ -315,8 +315,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="pypedream.input.known">
-<span class="sig-prename descclassname"><span class="pre">pypedream.input.</span></span><span class="sig-name descname"><span class="pre">known</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">as_arg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logged</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="pypedream.html#pypedream.Input" title="pypedream.core.stages.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pypedream.input.known" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pypedream.input.immediate">
+<span class="sig-prename descclassname"><span class="pre">pypedream.input.</span></span><span class="sig-name descname"><span class="pre">immediate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">as_arg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logged</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="pypedream.html#pypedream.Input" title="pypedream.core.stages.Input"><span class="pre">Input</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pypedream.input.immediate" title="Link to this definition">¶</a></dt>
 <dd><p>Create an Input object that binds to a known value</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -353,7 +353,7 @@
 <dd class="field-even"><p>an Input object</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="pypedream.html#pypedream.Input" title="pypedream.Input">Input</a>[<a class="reference internal" href="pypedream.html#pypedream.Parameters" title="pypedream.Parameters">Parameters</a>, Any]</p>
+<dd class="field-odd"><p><a class="reference internal" href="pypedream.html#pypedream.Input" title="pypedream.Input">Input</a>[<a class="reference internal" href="pypedream.core.pipelines.html#pypedream.core.pipelines.Parameters" title="pypedream.core.pipelines.Parameters">Parameters</a>, Any]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -376,7 +376,7 @@
 <dd class="field-even"><p>an Input object</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="pypedream.html#pypedream.Input" title="pypedream.Input">Input</a>[<a class="reference internal" href="pypedream.html#pypedream.Variables" title="pypedream.Variables">Variables</a>, Any]</p>
+<dd class="field-odd"><p><a class="reference internal" href="pypedream.html#pypedream.Input" title="pypedream.Input">Input</a>[<a class="reference internal" href="pypedream.core.pipelines.html#pypedream.core.pipelines.Variables" title="pypedream.core.pipelines.Variables">Variables</a>, Any]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -440,7 +440,7 @@
             <ul>
 <li><a class="reference internal" href="#">pypedream.input</a><ul>
 <li><a class="reference internal" href="#pypedream.input.dependency"><code class="docutils literal notranslate"><span class="pre">dependency()</span></code></a></li>
-<li><a class="reference internal" href="#pypedream.input.known"><code class="docutils literal notranslate"><span class="pre">known()</span></code></a></li>
+<li><a class="reference internal" href="#pypedream.input.immediate"><code class="docutils literal notranslate"><span class="pre">immediate()</span></code></a></li>
 <li><a class="reference internal" href="#pypedream.input.param"><code class="docutils literal notranslate"><span class="pre">param()</span></code></a></li>
 <li><a class="reference internal" href="#pypedream.input.var"><code class="docutils literal notranslate"><span class="pre">var()</span></code></a></li>
 </ul>
