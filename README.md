@@ -76,12 +76,12 @@ from pypedream import (
     ctx,
 )
 
-from pypedream.input import dependency, known, param
+from pypedream.input import dependency, immediate, param
 
 log_dir = Path.cwd() / "logs"
 log_dir.mkdir(exist_ok=True)
 pipeline = Pipeline(
-    "ok enough",
+    "rizz",
     Parameters.define(source1="your_mom", source2="your_girlfriend"),
     stages={
         **{
@@ -89,7 +89,7 @@ pipeline = Pipeline(
                 get_data,
                 inputs=[
                     param(f"source{i}", as_arg="source"),
-                    known(date.today(), as_arg="for_day"),
+                    immediate(date.today(), as_arg="for_day"),
                 ],
             )
             for i in (1, 2)
@@ -104,7 +104,7 @@ pipeline = Pipeline(
                 dependency("combine_data", as_arg="new_data"),
                 Input(
                     as_arg="sources",
-                    bind=InputBinding.deferred(
+                    bind=InputBinding.contextual(
                         ctx.PARAMETERS,
                         mapper=lambda params: [params["source1"], params["source2"]],
                     ),
@@ -114,7 +114,7 @@ pipeline = Pipeline(
         ),
     },
     log_settings=LoggerSettings(
-        "ok_enough",
+        "rizz",
         log_dir=ldir,
     )
 )
