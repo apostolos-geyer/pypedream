@@ -1,7 +1,6 @@
 from contextvars import ContextVar
 from warnings import warn
 from enum import Flag, auto
-from functools import cached_property
 from textwrap import dedent
 from typing import (
     Any,

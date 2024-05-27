@@ -1,7 +1,7 @@
 import contextvars
 import logging
 from collections.abc import MutableMapping
-from typing import Any, Callable, Iterable, ParamSpec, TypeVar, overload
+from typing import Any, Callable, Iterable, ParamSpec, TypeVar
 from os import PathLike
 from pathlib import Path
 import structlog
