@@ -433,25 +433,6 @@ class Pipeline:
     )
     ctx: contextvars.Context = field(init=False)
 
-    @overload
-    def stage(
-        self,
-        func: Callable[P, R],
-    ) -> Callable[P, R]:
-        """
-        Registers a stage in the pipeline under the name of the function
-
-        Parameters
-        ----------
-        func : Callable
-            the function to register as a stage
-
-        Returns
-        -------
-        the function
-        """
-        ...
-
     def stage(
         self,
         name_or_callable: str | Callable[P, R] | None = None,

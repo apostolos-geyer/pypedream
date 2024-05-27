@@ -1,4 +1,4 @@
-pypedream.logging
+﻿pypedream.logging
 =================
 
 .. automodule:: pypedream.logging

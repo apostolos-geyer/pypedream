@@ -91,7 +91,7 @@ class OutputMapperBehaviour(Flag):
         """
         A validator for the OutputMapperBehaviour enum that ensures that the value makes logical sense, for attrs class use.
         """
-        if not isinstance(value, OutputMapperBehaviour):
+        if not isinstance(value, OutputMapperBehaviour):  # pragma: no cover
             raise ValueError(
                 "Invalid behaviour value. Should be an OutputMapperBehaviour enum value or union of them"
             )
@@ -214,7 +214,7 @@ class SequentialOutputMapper:
                     )
                 return mapping
 
-            case _:
+            case _:  # pragma: no cover
                 raise ValueError(
                     "Invalid behaviour value. Should include STRICT, CHILL, or PRESERVE to determine how to handle unexpected outputs."
                 )
@@ -243,11 +243,10 @@ class SequentialOutputMapper:
             else self._handle_unexpected(x)
         )
 
-    def __repr__(self) -> str:
+    def __repr__(self) -> str:  # pragma: no cover
         return f"SequentialOutputMapper(keys={self.keys})"
 
-    @cached_property
-    def __str__(self) -> str:
+    def __str__(self) -> str:  # pragma: no cover
         string = "SequentialOutputMapper(\n"
         for i, key in enumerate(self.keys):
             string += f" Ouput[{i}] -> {key}\n"
@@ -324,7 +323,7 @@ class KeyedOutputMapper:
                     )
                 return mapping
 
-            case _:
+            case _:  # pragma: no cover
                 raise ValueError(
                     "Invalid behaviour value. Should include STRICT, CHILL, or PRESERVE to determine how to handle unexpected outputs."
                 )
@@ -355,11 +354,10 @@ class KeyedOutputMapper:
             else self._handle_unexpected(x)
         )
 
-    def __repr__(self) -> str:
+    def __repr__(self) -> str:  # pragma: no cover
         return f"MappingOutputMapper(keys={self.keys})"
 
-    @cached_property
-    def __str__(self) -> str:
+    def __str__(self) -> str:  # pragma: no cover
         string = "MappingOutputMapper(\n"
         for key, value in self.keys.items():
             string += f" {key} -> {value}\n"
@@ -661,7 +659,7 @@ class InputBinding(Generic[T, R]):
         """
         replaced by `immediate`
         """
-        return cls.immediate(source, mapper)
+        return cls.immediate(source, mapper)  # pragma: no cover
 
     @classmethod
     def deferred(
@@ -673,7 +671,7 @@ class InputBinding(Generic[T, R]):
         """
         replaced by `contextual`
         """
-        return cls.contextual(source, mapper, get_first)
+        return cls.contextual(source, mapper, get_first)  # pragma: no cover
 
 
 class UnboundInputException(Exception):
@@ -687,7 +685,7 @@ class UnboundInputException(Exception):
         self.binding = binding
         super().__init__(*args)
 
-    def __str__(self) -> str:
+    def __str__(self) -> str:  # pragma: no cover
         source, mapper, defer = (
             self.binding.source,
             self.binding.mapper,
@@ -742,7 +740,7 @@ class DependencyInputMapper(Generic[T, R]):
                     )
                 case (True, _, _):
                     return stage.outputs.get(self.from_output, self.default)
-                case _:
+                case _:  # pragma: no cover
                     raise Exception("what the f")
 
 
@@ -865,7 +863,7 @@ class Stage(Generic[P, R]):
         self.has_run = False
         self.outputs = {}
 
-    def __repr__(self) -> str:
+    def __repr__(self) -> str:  # pragma: no cover
         repr = dedent(
             f"""\
             Stage(
@@ -878,7 +876,7 @@ class Stage(Generic[P, R]):
         )
         return repr
 
-    def __str__(self) -> str:
+    def __str__(self) -> str:  # pragma: no cover
         # TODO make this nicer
         return dedent(
             f"""\

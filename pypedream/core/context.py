@@ -15,7 +15,7 @@ from typing import TYPE_CHECKING, Any
 from contextvars import ContextVar
 from pypedream.core.logs import BASE_LOGGER
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from pypedream.core.pipelines import Pipeline, Variables, Parameters
     from pypedream.core.stages import Stage, StageTable
 else:
