@@ -1,3 +1,5 @@
+this has been left to die for the time being. i really just wanted an excuse to procrastinate schoolwork at the time and to learn how to make a github pages site and publish a package. this sucks. but i had fun making it. maybe ill come back one day.
+
 # *pypedream*: pipelines, in just python
 <p align="center">
     <img src="./_docsrc/_static/pypedream.webp" width=150 height=150>
